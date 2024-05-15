@@ -4,10 +4,11 @@ import {
   createGlobalStyle,
   css,
 } from 'styled-components';
-import 'antd/dist/antd.min.css';
+import 'antd/dist/reset.css';
 
 import colors from './colors';
 import { fontSize, fontWeight } from './fonts';
+export { UserIcon } from './icons';
 
 export const MEDIA_WIDTHS: any = {
   upToExtraSmall: 500,

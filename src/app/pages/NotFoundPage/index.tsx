@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import pageNotFound from '../../assets/images/pageNotFound.gif';
+import pageNotFound from '@assets/images/pageNotFound.gif';
 // import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 const NotFoundPage = () => {

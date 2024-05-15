@@ -2,7 +2,7 @@ import routes from '@routers/routes';
 import Home from '@pages/Home';
 import Login from '@pages/Login';
 import NotFoundPage from '@pages/NotFoundPage';
-
+import LayoutDefault from 'layout/main';
 const Routers: Types.IRoute[] = [
   {
     key: 1,
@@ -10,6 +10,7 @@ const Routers: Types.IRoute[] = [
     component: Home,
     isProtected: true,
     isAdmin: false,
+    layout: LayoutDefault,
   },
   {
     key: 2,

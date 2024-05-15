@@ -27,6 +27,10 @@ const WrapperFormItem = styled(Form.Item)`
     position: relative;
     .inputText {
       width: 100%;
+      padding: 4px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid #e4e5ea;
     }
     .eye-password {
       position: absolute;
