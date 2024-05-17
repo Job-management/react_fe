@@ -79,16 +79,16 @@ const FormPassword = ({
           value={value}
           {...rest}
         />
-        {isShowPassword && (
+        {!isShowPassword && (
           <EyeOutlined
             className="eye-password"
-            onClick={() => setIsShowPassword(false)}
+            onClick={() => setIsShowPassword(true)}
           />
         )}
-        {!isShowPassword && (
+        {isShowPassword && (
           <EyeInvisibleOutlined
             className="eye-password"
-            onClick={() => setIsShowPassword(true)}
+            onClick={() => setIsShowPassword(false)}
           />
         )}
       </div>

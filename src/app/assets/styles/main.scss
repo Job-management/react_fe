@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-btn-primary {
+  background-color: #1677ff;
+  &:hover {
+    color: #ffffff;
+  }
+}
