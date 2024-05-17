@@ -2,7 +2,7 @@ declare namespace Types {
   interface ILoginRequest {
     email: string;
     password: string;
-    isRememberMe: boolean;
+    isRememberMe?: boolean;
   }
   interface ILoginResultProperty {
     accessToken: string;
@@ -23,5 +23,25 @@ declare namespace Types {
     result?: ILoginResultProperty;
     timestamp?: number;
     stack?: string;
+  }
+  interface IDataSignupResponse {
+    name: string;
+    email: string;
+    id: string;
+    avatar: string;
+  }
+  interface ISignupResponse {
+    error?: boolean;
+    message: string;
+    data: IDataSignupResponse;
+    code: number;
+    result?: ILoginResultProperty;
+    timestamp?: number;
+    stack?: string;
+  }
+  interface ISignUpRequest {
+    name: string;
+    email: string;
+    password: string;
   }
 }

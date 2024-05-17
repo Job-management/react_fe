@@ -4,6 +4,7 @@
 		"signUp": "Sign up",
 		"email": "Email",
 		"password": "Password",
+		"name": "Name",
 		"header": {
 			"login": "Sign in to your account"
 		}

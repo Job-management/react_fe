@@ -72,23 +72,23 @@ const FormPassword = ({
       <div className="wrapper">
         <input
           id={name}
-          type={isShowPassword ? 'password' : 'text'}
+          type={isShowPassword ? 'text' : 'password'}
           placeholder={placeholder}
           className="inputText"
           onChange={onChange}
           value={value}
           {...rest}
         />
-        {!isShowPassword && (
+        {isShowPassword && (
           <EyeOutlined
             className="eye-password"
-            onClick={() => setIsShowPassword(true)}
+            onClick={() => setIsShowPassword(false)}
           />
         )}
-        {isShowPassword && (
+        {!isShowPassword && (
           <EyeInvisibleOutlined
             className="eye-password"
-            onClick={() => setIsShowPassword(false)}
+            onClick={() => setIsShowPassword(true)}
           />
         )}
       </div>

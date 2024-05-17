@@ -10,7 +10,7 @@ const initialState: Types.IPostState = {
 };
 
 const PostSlice = createSlice({
-  name: 'post/getall',
+  name: 'app/post',
   initialState,
   reducers: {
     // resetWorkStandardStore: () => initialState,

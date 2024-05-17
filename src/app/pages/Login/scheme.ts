@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { TFunction } from 'i18next';
-
+import { regexHelper } from '@utils/helpers';
 const scheme = (t: TFunction) =>
   yup.object().shape({
     email: yup
@@ -21,6 +21,12 @@ const scheme = (t: TFunction) =>
         t('error_message:validation.max_length', {
           key: t('common:auth.email'),
           max: 200,
+        }),
+      )
+      .matches(
+        regexHelper.regex.email,
+        t('error_message:validation.invalid_email', {
+          key: t('common:auth.email'),
         }),
       ),
     password: yup

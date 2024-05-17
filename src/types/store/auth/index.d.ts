@@ -7,6 +7,7 @@ declare namespace Types {
     actionType: string;
     loading: boolean;
     loginInProgress: boolean;
+    signupProcess: boolean;
     accessTokenVerify: string;
     isVerified: boolean;
     email: string;
