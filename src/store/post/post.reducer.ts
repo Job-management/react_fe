@@ -2,42 +2,37 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import { Table } from 'utils/helpers/table';
 
-import { login } from './auth.action';
-const initialState: Types.IAuthState = {
+import { getAllPost } from './post.action';
+const initialState: Types.IPostState = {
   actionType: '',
   loading: false,
-  loginInProgress: false,
-  accessTokenVerify: '',
-  isVerified: false,
-  email: '',
-  role: undefined,
-  userName: '',
+  posts: [],
 };
 
-const LoginSlice = createSlice({
-  name: 'auth/login',
+const PostSlice = createSlice({
+  name: 'post/getall',
   initialState,
   reducers: {
     // resetWorkStandardStore: () => initialState,
   },
   extraReducers: (builder) => {
     // auth login
-    builder.addCase(login.pending, (state, action) => {
+    builder.addCase(getAllPost.pending, (state, action) => {
       state.loading = true;
       state.actionType = action.type;
-      state.loginInProgress = true;
+      state.posts = [];
     });
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(getAllPost.fulfilled, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
-      state.loginInProgress = false;
+      state.posts = action.payload.data.data;
     });
-    builder.addCase(login.rejected, (state, action) => {
+    builder.addCase(getAllPost.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
-      state.loginInProgress = false;
+      state.posts = [];
     });
   },
 });
 // export const { resetWorkStandardStore } = LoginSlice.actions;
-export default LoginSlice.reducer;
+export default PostSlice.reducer;

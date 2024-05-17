@@ -11,8 +11,7 @@ const apiUser = axios.create({
 apiUser.interceptors.request.use(
   (config) => {
     const stringifiedToken = localStorage.getItem(TOKEN.ACCESS_TOKEN_KEY) || '';
-    const token = stringifiedToken !== '' ? JSON.parse(stringifiedToken) : '';
-    const bearerToken = jwtHelper.getBearerToken(token);
+    const bearerToken = jwtHelper.getBearerToken(stringifiedToken);
 
     if (config.headers) {
       config.headers['Authorization'] = bearerToken;

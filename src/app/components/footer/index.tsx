@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.footer`
+  width: 100%;
   margin: 0 1rem 0.5rem;
   border-radius: 1rem;
   box-shadow: 0 1.6rem 3rem rgb(0 0 0 / 10%);
