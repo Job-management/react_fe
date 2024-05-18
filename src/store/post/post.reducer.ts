@@ -6,7 +6,7 @@ import { getAllPost } from './post.action';
 const initialState: Types.IPostState = {
   actionType: '',
   loading: false,
-  posts: [],
+  postsList: [],
 };
 
 const PostSlice = createSlice({
@@ -20,17 +20,17 @@ const PostSlice = createSlice({
     builder.addCase(getAllPost.pending, (state, action) => {
       state.loading = true;
       state.actionType = action.type;
-      state.posts = [];
+      state.postsList = [];
     });
     builder.addCase(getAllPost.fulfilled, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
-      state.posts = action.payload.data.data;
+      state.postsList = action.payload.data.data;
     });
     builder.addCase(getAllPost.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
-      state.posts = [];
+      state.postsList = [];
     });
   },
 });

@@ -4,7 +4,7 @@ const BASE_API_URL = {
 };
 
 const POST_API_URL = {
-  GETALL: '/api/crawl/',
+  GETALL: '/api/v1/crawl/',
 };
 
 export { BASE_API_URL, POST_API_URL };

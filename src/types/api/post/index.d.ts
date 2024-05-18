@@ -24,7 +24,7 @@ declare namespace Types {
     description: string;
     requirements: string;
     deadline: string;
-    images: IImage;
+    images: IImage[];
     link: string;
     type: string;
     contact: string;

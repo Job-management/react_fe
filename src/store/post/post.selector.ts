@@ -5,8 +5,8 @@ import { AppDispatch } from '../../store';
 
 export const usePost = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, actionType } = useSelector(
-    (state: Types.IStoreState) => state.auth,
+  const { loading, actionType, postsList } = useSelector(
+    (state: Types.IStoreState) => state.post,
     shallowEqual,
   );
   const onGetAllPost = useCallback(async () => {
@@ -14,6 +14,7 @@ export const usePost = () => {
   }, [dispatch]);
   return {
     onGetAllPost,
+    postsList,
     loading,
     actionType,
   };

@@ -6,6 +6,9 @@ import Slide_1 from '@assets/images/slide_1.png';
 import Slide_2 from '@assets/images/slide_2.png';
 import GridComponent from '@components/common/Grid';
 import { topCompany, banner } from '@utils/constants';
+import PostList from '@components/post-list';
+import MailSubscribe from '@components/mail-subscribe';
+
 const Home = () => {
   return (
     <Wrapper>
@@ -66,7 +69,12 @@ const Home = () => {
           })}
         </GridComponent>
       </div>
-      <div className="job-list__container"></div>
+      <div className="job-list__container">
+        <PostList />
+      </div>
+      <div className="mail-subscrive__containter">
+        <MailSubscribe />
+      </div>
     </Wrapper>
   );
 };
