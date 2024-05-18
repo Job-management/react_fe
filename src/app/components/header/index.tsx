@@ -1,13 +1,18 @@
 // src/components/Header.js
-import { useState } from 'react';
 import { UserOutlined } from '@ant-design/icons';
+import useAuthForm from 'app/hooks/useAuthForm';
 import { WrapperStyled } from './styled';
-import AuthForm from '@components/auth';
 const Header = () => {
-  const [isOpenAuth, setIsOpenAuth] = useState<boolean>(false);
+  const { openAuthForm, AuthFormElement } = useAuthForm();
+  const handleOpenSignIn = () => {
+    openAuthForm(true);
+  };
+  const handleOpenSignUp = () => {
+    openAuthForm(false);
+  };
   return (
     <>
-      {isOpenAuth && <AuthForm closeFunc={() => setIsOpenAuth(false)} />}
+      <AuthFormElement />
       <WrapperStyled>
         <header className="bg-white text-black w-full">
           <div className="flex justify-between items-center p-4 w-full">
@@ -30,10 +35,10 @@ const Header = () => {
                 <div className="w-[26px] h-[26px] rounded-[50px] bg-[#5d677a] text-white flex justify-center items-center">
                   <UserOutlined />
                 </div>
-                <a onClick={() => setIsOpenAuth(true)}>Sign up</a>
+                <a onClick={handleOpenSignIn}>Sign up</a>
               </div>
               <div className="hover:text-gray-400 cursor-pointer">
-                <a onClick={() => setIsOpenAuth(true)}>Login</a>
+                <a onClick={handleOpenSignUp}>Login</a>
               </div>
             </div>
           </div>

@@ -32,3 +32,24 @@ export const login = createAsyncThunk(
     }
   },
 );
+export const signUp = createAsyncThunk(
+  'auth/signup',
+  async (payload: Types.ISignUpRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.post<Types.ISignupResponse>(BASE_API_URL.SIGNUP, payload);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);

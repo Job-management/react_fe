@@ -45,6 +45,8 @@ export const Wrapper = styled.div`
     margin-bottom: 40px;
   }
   .job-list__container {
-    border-top: 1px solid #eeeeee;
+    min-height: 960px;
+  }
+  .mail-subscrive__containter {
   }
 `;

@@ -1,4 +1,4 @@
-import { login } from './auth.action';
+import { login, signUp } from './auth.action';
 import { useCallback } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store';
@@ -15,8 +15,15 @@ export const useAuth = () => {
     },
     [dispatch],
   );
+  const onSignUp = useCallback(
+    async (payload: Types.ISignUpRequest) => {
+      return await dispatch(signUp(payload));
+    },
+    [dispatch],
+  );
   return {
     onLogin,
+    onSignUp,
     loading,
     actionType,
   };

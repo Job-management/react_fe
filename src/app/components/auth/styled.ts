@@ -90,11 +90,11 @@ export const Container = styled.div`
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
   }
-  &.active .toggle {
-    transform: translateX(50%);
-  }
   &.active .toggle-right {
     transform: translateX(200%);
+  }
+  &.active .toggle-left {
+    transform: translateX(100%);
   }
 `;
 

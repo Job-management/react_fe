@@ -7,24 +7,21 @@ import { Modal } from 'antd';
 
 // import { objectToQueryString } from 'utils/request';
 
-export const getAllPost = createAsyncThunk(
-  'post/getall',
-  async (payload: Types.ILoginRequest, { rejectWithValue }) => {
-    try {
-      const response = await apiUser.get<Types.IPostResponse>(POST_API_URL.GETALL);
-      return {
-        data: response.data,
-      };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      Modal.error({
-        title: err?.response?.data?.message,
-        className: 'modal-type-2',
-        onOk: () => {
-          return;
-        },
-      });
-      return rejectWithValue(err);
-    }
-  },
-);
+export const getAllPost = createAsyncThunk('post/getall', async (_, { rejectWithValue }) => {
+  try {
+    const response = await apiUser.get<Types.IPostResponse>(POST_API_URL.GETALL);
+    return {
+      data: response.data,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    Modal.error({
+      title: err?.response?.data?.message,
+      className: 'modal-type-2',
+      onOk: () => {
+        return;
+      },
+    });
+    return rejectWithValue(err);
+  }
+});

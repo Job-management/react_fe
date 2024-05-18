@@ -12,7 +12,6 @@ import {
   Container,
   Form,
   FormContainer,
-  Input,
   SocialIcons,
   Toggle,
   ToggleContainer,
@@ -25,28 +24,42 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '@store/auth/auth.selector';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import LoginScheme from './scheme';
+import { loginScheme, signUpScheme } from './scheme';
+import Notification from '@components/notification';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const AuthForm = ({ closeFunc }: any) => {
+const AuthForm = ({ closeFunc, isSignIn }: any) => {
   const { t } = useTranslation(['common']);
 
-  const [active, setActive] = useState(false);
-  const form = useForm<{ email: string; password: string }>({
-    resolver: yupResolver(LoginScheme(t)),
+  const [active, setActive] = useState(isSignIn);
+  const formLogin = useForm<{ email: string; password: string }>({
+    resolver: yupResolver(loginScheme(t)),
   });
-  const { handleSubmit } = form;
+  const formSignUp = useForm<{ name: string; email: string; password: string }>({
+    resolver: yupResolver(signUpScheme(t)),
+  });
+  const { handleSubmit: handleSubmitLogin } = formLogin;
+  const { handleSubmit: handleSubmitSignUp } = formSignUp;
 
-  const { onLogin } = useAuth();
+  const { onLogin, onSignUp } = useAuth();
 
-  const onSubmit = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (data: any) => {
-      console.log(data);
-
+  const onSubmitLogin = useCallback(
+    (data: Types.ILoginRequest) => {
       onLogin(data);
     },
     [onLogin],
+  );
+
+  const onSubmitSignUp = useCallback(
+    (data: Types.ISignUpRequest) => {
+      console.log(data);
+
+      onSignUp(data).then(() => {
+        Notification.success('Sign up successful');
+        setActive(false);
+      });
+    },
+    [onSignUp],
   );
 
   return (
@@ -55,8 +68,8 @@ const AuthForm = ({ closeFunc }: any) => {
       <Container className={classNames({ active: active })}>
         {/* Sign up */}
         <FormContainer className="form-container sign-up">
-          <FormProvider {...form}>
-            <Form>
+          <FormProvider {...formSignUp}>
+            <Form onSubmit={handleSubmitSignUp(onSubmitSignUp)}>
               <h1>Create Account</h1>
               <SocialIcons>
                 <a
@@ -81,16 +94,16 @@ const AuthForm = ({ closeFunc }: any) => {
                 </a>
               </SocialIcons>
               <span>or use your email for registration</span>
-              <Input
-                type="text"
+              <FormInput
+                name="name"
                 placeholder="Name"
               />
-              <Input
-                type="email"
+              <FormInput
+                name="email"
                 placeholder="Email"
               />
-              <Input
-                type="password"
+              <FormPassword
+                name="password"
                 placeholder="Password"
               />
               <ButtonStyled htmlType="submit">Sign Up</ButtonStyled>
@@ -99,8 +112,8 @@ const AuthForm = ({ closeFunc }: any) => {
         </FormContainer>
         {/* Sign in */}
         <FormContainer className="form-container sign-in">
-          <FormProvider {...form}>
-            <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormProvider {...formLogin}>
+            <Form onSubmit={handleSubmitLogin(onSubmitLogin)}>
               <h1>Sign In</h1>
               <SocialIcons>
                 <a
@@ -127,7 +140,6 @@ const AuthForm = ({ closeFunc }: any) => {
               <span>or use your email password</span>
               <FormInput
                 name="email"
-                type="email"
                 placeholder="Email"
               />
               <FormPassword
