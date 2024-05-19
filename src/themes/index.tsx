@@ -8,7 +8,7 @@ import 'antd/dist/reset.css';
 
 import colors from './colors';
 import { fontSize, fontWeight } from './fonts';
-export { UserIcon } from './icons';
+export { UserIcon, NotificationIcon } from './icons';
 
 export const MEDIA_WIDTHS: any = {
   upToExtraSmall: 500,

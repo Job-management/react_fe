@@ -1,9 +1,18 @@
 // src/components/Header.js
 import { UserOutlined } from '@ant-design/icons';
+import { getLocalStorage, STORAGE } from '@utils/helpers';
 import useAuthForm from 'app/hooks/useAuthForm';
 import { WrapperStyled } from './styled';
+import { useMemo, useState } from 'react';
+import { NotificationIcon } from '@themes';
+import MenuProfile from '@components/menu-profile';
 const Header = () => {
   const { openAuthForm, AuthFormElement } = useAuthForm();
+  const USER_DATA = useMemo(() => {
+    const localStorageData = getLocalStorage(STORAGE.USER_DATA);
+    return localStorageData ? JSON.parse(localStorageData) : null;
+  }, []);
+  const [isOpenProfileMenu, setIsOpenProfileMenu] = useState<boolean>(false);
   const handleOpenSignIn = () => {
     openAuthForm(true);
   };
@@ -30,17 +39,34 @@ const Header = () => {
                 </div>
               </nav>
             </div>
-            <div className="flex justify-between items-center w-36">
-              <div className="flex hover:text-gray-400 cursor-pointer w-[5.5rem] justify-between">
-                <div className="w-[26px] h-[26px] rounded-[50px] bg-[#5d677a] text-white flex justify-center items-center">
-                  <UserOutlined />
+            {USER_DATA ? (
+              <div className="flex justify-between items-center">
+                <div className="hover:text-gray-400 cursor-pointer">
+                  <NotificationIcon />
                 </div>
-                <a onClick={handleOpenSignIn}>Sign up</a>
+                <button>
+                  <img
+                    src={USER_DATA.avatar.url}
+                    className="w-9 h-9 ml-4 rounded-full"
+                    alt="avatarUser"
+                    onClick={() => setIsOpenProfileMenu(!isOpenProfileMenu)}
+                  />
+                  {isOpenProfileMenu && <MenuProfile />}
+                </button>
               </div>
-              <div className="hover:text-gray-400 cursor-pointer">
-                <a onClick={handleOpenSignUp}>Login</a>
+            ) : (
+              <div className="flex justify-between items-center w-36">
+                <div className="flex hover:text-gray-400 cursor-pointer w-[5.5rem] justify-between">
+                  <div className="w-[26px] h-[26px] rounded-[50px] bg-[#5d677a] text-white flex justify-center items-center">
+                    <UserOutlined />
+                  </div>
+                  <a onClick={handleOpenSignIn}>Sign up</a>
+                </div>
+                <div className="hover:text-gray-400 cursor-pointer">
+                  <a onClick={handleOpenSignUp}>Login</a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </header>
         <div className="border-bottom"></div>

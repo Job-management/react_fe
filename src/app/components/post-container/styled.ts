@@ -11,6 +11,7 @@ export const WrapperStyled = styled.div`
     }
   }
   .pagination {
+    margin-top: 16px;
     display: flex;
     justify-content: center;
   }

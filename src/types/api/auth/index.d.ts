@@ -10,10 +10,17 @@ declare namespace Types {
   }
 
   interface IDataLoginResponse {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    user: any;
+    user: IUserData;
     access_token: string;
     refresh_token: string;
+  }
+  interface IUserData {
+    id: number;
+    email: string;
+    name: string;
+    avatar: string;
+    role: Types.ERole;
+    isVerified: boolean;
   }
   interface ILoginResponse {
     error?: boolean;
