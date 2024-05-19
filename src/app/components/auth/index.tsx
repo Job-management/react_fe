@@ -26,11 +26,12 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { loginScheme, signUpScheme } from './scheme';
 import Notification from '@components/notification';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AuthForm = ({ closeFunc, isSignIn }: any) => {
   const { t } = useTranslation(['common']);
-
+  const navigate = useNavigate();
   const [active, setActive] = useState(isSignIn);
   const formLogin = useForm<{ email: string; password: string }>({
     resolver: yupResolver(loginScheme(t)),
@@ -45,7 +46,14 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
 
   const onSubmitLogin = useCallback(
     (data: Types.ILoginRequest) => {
-      onLogin(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onLogin(data).then((response: any) => {
+        if (!response?.error) {
+          Notification.success('Login successful');
+          closeFunc();
+          navigate(0);
+        }
+      });
     },
     [onLogin],
   );

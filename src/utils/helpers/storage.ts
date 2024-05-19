@@ -1,5 +1,3 @@
-import { TOKEN } from '@utils/constants/auth';
-
 export enum STORAGE {
   LANGUAGE,
   USER_TOKEN,
@@ -16,12 +14,12 @@ export function setLocalStorage(key: STORAGE, value: string) {
   return localStorage.setItem(STORAGE[key], value);
 }
 
-export function setAccessToken(key: TOKEN.ACCESS_TOKEN_KEY, value: string) {
-  return localStorage.setItem(key, value);
+export function setAccessToken(value: string) {
+  return localStorage.setItem(STORAGE[STORAGE.USER_TOKEN], value);
 }
 
-export function setRefreshToken(key: TOKEN.REFRESH_TOKEN_KEY, value: string) {
-  return localStorage.setItem(key, value);
+export function setRefreshToken(value: string) {
+  return localStorage.setItem(STORAGE[STORAGE.USER_REFRESH], value);
 }
 
 export function removeLocalStorage(key: STORAGE) {
