@@ -1,11 +1,11 @@
 // src/components/Header.js
 import { UserOutlined } from '@ant-design/icons';
+import MenuProfile from '@components/menu-profile';
+import { NotificationIcon } from '@themes';
 import { getLocalStorage, STORAGE } from '@utils/helpers';
 import useAuthForm from 'app/hooks/useAuthForm';
-import { WrapperStyled } from './styled';
 import { useMemo, useState } from 'react';
-import { NotificationIcon } from '@themes';
-import MenuProfile from '@components/menu-profile';
+import { WrapperStyled } from './styled';
 const Header = () => {
   const { openAuthForm, AuthFormElement } = useAuthForm();
   const USER_DATA = useMemo(() => {
@@ -26,7 +26,11 @@ const Header = () => {
         <header className="bg-white text-black w-full">
           <div className="flex justify-between items-center p-4 w-full">
             <div className="flex justify-between items-center">
-              <div className="text-xl font-bold w-[10rem]">Career Connect</div>
+              <a
+                className="text-xl font-bold w-[10rem]"
+                href="/home">
+                Career Connect
+              </a>
               <nav className="flex space-x-4">
                 <div className="hover:text-gray-400 cursor-pointer">
                   <a href="#a">Find jobs</a>

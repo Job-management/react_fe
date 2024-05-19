@@ -32,6 +32,12 @@ export const WrapperStyled = styled.div`
         font-weight: 700;
         line-height: 1.2;
         text-overflow: ellipsis;
+        margin-top: 10px;
+        max-height: 38px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
         &:hover {
           color: #e8c80d;
         }
