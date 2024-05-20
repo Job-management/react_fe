@@ -6,8 +6,7 @@ import { TabsStyled } from './styled';
 const PostList = () => {
   const { onGetAllPost, postsList } = usePost();
   const handleGetData = useCallback(() => {
-    onGetAllPost();
-    console.log(postsList);
+    onGetAllPost({ page: 1, limit: 10 });
   }, [postsList]);
   useEffect(() => {
     handleGetData();

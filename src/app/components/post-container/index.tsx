@@ -1,11 +1,17 @@
 import PostPreview from '@components/post-preview';
 import { WrapperStyled } from './styled';
 import { Pagination } from 'antd';
+import { useCallback } from 'react';
+import { usePost } from '@store/post/post.selector';
 interface Props {
   data: Types.IDataPostResponse[];
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const PostContainer = ({ data }: Props) => {
+  const { onGetAllPost, postTotalSize } = usePost();
+  const handleChangePagination = useCallback((page: number) => {
+    onGetAllPost({ page, limit: 10 });
+  }, []);
   return (
     <WrapperStyled>
       <div className="container">
@@ -21,7 +27,10 @@ const PostContainer = ({ data }: Props) => {
       <div className="pagination">
         <Pagination
           defaultCurrent={1}
-          total={50}
+          defaultPageSize={10}
+          showSizeChanger={false}
+          total={postTotalSize}
+          onChange={handleChangePagination}
         />
       </div>
     </WrapperStyled>

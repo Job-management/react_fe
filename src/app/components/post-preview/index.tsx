@@ -1,9 +1,15 @@
-import { WrapperStyled } from './styled';
 import LogoDefault from '@assets/images/logo-default.png';
+import moment from 'moment';
+import { useCallback } from 'react';
+import { WrapperStyled } from './styled';
 interface Props {
   post: Types.IDataPostResponse;
 }
 const PostPreview = ({ post }: Props) => {
+  const handleFormatDate = useCallback((timestamp: string) => {
+    const date = new Date(Number(timestamp));
+    return moment(date).fromNow();
+  }, []);
   return (
     <WrapperStyled className="figure">
       <div className="image">
@@ -48,8 +54,11 @@ const PostPreview = ({ post }: Props) => {
         </div>
       </div>
       <div className="top-icon">
-        {' '}
-        <span className="top">Top</span>{' '}
+        {Number.isNaN(Number(post.time)) ? (
+          <span className="top">Top</span>
+        ) : (
+          <p>{handleFormatDate(post.time)}</p>
+        )}{' '}
       </div>
     </WrapperStyled>
   );
