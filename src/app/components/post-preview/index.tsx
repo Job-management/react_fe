@@ -30,7 +30,7 @@ const PostPreview = ({ post }: Props) => {
           <a
             target="_blank"
             rel="noreferrer"
-            // href="https://careerviet.vn/vi/tim-viec-lam/quan-12-ktv-xu-ly-hinh-anh-chuyen-photoshop-08-00-17-50-t2-t6.35C02B8E.html"
+            href={`/post/${post.id}`}
             title={post?.title}>
             {post?.title}
           </a>

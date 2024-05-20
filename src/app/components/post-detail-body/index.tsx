@@ -12,8 +12,39 @@ import {
   TeamOutlined,
   UserAddOutlined,
 } from '@ant-design/icons';
+import { dateTimeHelper } from '@utils/helpers';
 
-const PostDetailBody = () => {
+interface Props {
+  probationTime: string;
+  time: string;
+  description: string;
+  sexual: string;
+  numberEmployees: number;
+  age: string;
+  education: string;
+  experience: string;
+  right: string;
+  requirements: string;
+  workWay: string;
+  place: string;
+  city: string;
+}
+
+const PostDetailBody = ({
+  probationTime,
+  time,
+  sexual,
+  description,
+  numberEmployees,
+  requirements,
+  workWay,
+  age,
+  education,
+  experience,
+  right,
+  place,
+  city,
+}: Props) => {
   return (
     <div className="w-full px-10 text-16 font-semibold bg-white p-[14px] cursor-pointer text-se-accent-100 text-center border-se-accent-100 shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
       <div className="py-4 bg-white shadow-sd-12 rounded-sm">
@@ -24,21 +55,21 @@ const PostDetailBody = () => {
               <CarryOutOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-calendar-day" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Ngày đăng</p>
-                <p className="text-[14px]">07/05/2024</p>
+                <p className="text-[14px]">{dateTimeHelper.handleConvertTimestampToDate(time)}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 md:w-[33%] text-start">
               <PicRightOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-calendar-alt" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Thời gian thử việc</p>
-                <p className="text-[14px]">2 tháng</p>
+                <p className="text-[14px]">{probationTime ? probationTime : '2 months'}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 md:w-[33%] text-start">
               <CompassOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-medal" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Cấp bậc</p>
-                <p className="text-[14px]">Chuyên viên- nhân viên</p>
+                <p className="text-[14px]">Nhân viên</p>
               </h3>
             </div>
           </div>
@@ -47,21 +78,21 @@ const PostDetailBody = () => {
               <TeamOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-venus-mars" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Yêu cầu giới tính</p>
-                <p className="text-[14px]">Nam</p>
+                <p className="text-[14px]">{sexual ? sexual : '-'}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 md:w-[33%] text-start">
               <UserAddOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-users" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Số lượng tuyển</p>
-                <p className="text-[14px]">2</p>
+                <p className="text-[14px]">{numberEmployees ? numberEmployees : 1}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 w-full md:w-[33%] text-start">
               <AppstoreOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-hard-hat" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Hình thức làm việc</p>
-                <p className="text-[14px]">Toàn thời gian cố định</p>
+                <p className="text-[14px]">{workWay}</p>
               </h3>
             </div>
           </div>
@@ -70,21 +101,21 @@ const PostDetailBody = () => {
               <InsertRowAboveOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-family" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Độ tuổi</p>
-                <p className="text-[14px]">20 - 30 tuổi</p>
+                <p className="text-[14px]">{age ? age : 'Không đề cập'}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 w-full md:w-[33%] text-start">
               <FileDoneOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-graduation-cap" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Yêu cầu bằng cấp</p>
-                <p className="text-[14px]">Trung cấp</p>
+                <p className="text-[14px]">{education ? education : 'Không đề cập'}</p>
               </h3>
             </div>
             <div className="flex items-center mb-4 w-full md:w-[33%] text-start">
               <CrownOutlined className="w-[32px] h-[32px] min-w-[32px] flex items-center justify-center rounded-full bg-[#EDE9FE] text-[#8B5CF6] text-20 svicon-experience-user" />
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Yêu cầu kinh nghiệm</p>
-                <p className="text-[14px]">Dưới 1 năm</p>
+                <p className="text-[14px]">{experience ? experience : 'Không đề cập'}</p>
               </h3>
             </div>
           </div>
@@ -94,26 +125,7 @@ const PostDetailBody = () => {
               <h3 className="ml-3">
                 <p className="mr-1 text-se-neutral-64 text-[12px]">Ngành nghề</p>
                 <p className="text-[14px] text-se-accent font-semibold">
-                  <a
-                    title="Việc làm ngành Vận hành - Bảo trì - Bảo dưỡng"
-                    className="hover:text-se-accent"
-                    href="/mien-nam/viec-lam-van-hanh-bao-tri-bao-duong-o10.html">
-                    Vận hành - Bảo trì - Bảo dưỡng
-                    <span className="mx-1">/</span>
-                  </a>
-                  <a
-                    title="Việc làm ngành Sản xuất - Lắp ráp - Chế biến"
-                    className="hover:text-se-accent"
-                    href="/mien-nam/viec-lam-san-xuat-lap-rap-che-bien-o9.html">
-                    Sản xuất - Lắp ráp - Chế biến
-                    <span className="mx-1">/</span>
-                  </a>
-                  <a
-                    title="Việc làm ngành Điện - Điện tử - Điện lạnh"
-                    className="hover:text-se-accent"
-                    href="/mien-nam/viec-lam-dien-dien-tu-dien-lanh-o41.html">
-                    Điện - Điện tử - Điện lạnh
-                  </a>
+                  Vận hành - Bảo trì - Bảo dưỡng
                 </p>
               </h3>
             </div>
@@ -123,84 +135,58 @@ const PostDetailBody = () => {
       <div className="text-start">
         <h2 className="text-[24px] font-semibold py-4">Mô tả công việc</h2>
         <div className="mb-2 text-[14px] font-normal break-words text-[#777779] text-description">
-          <p>
-            - Vận hành, theo dõi, kiểm tra định kỳ, bảo dưỡng, phát hiện và giải quyết, xử lý sự cố
-            liên quan đến máy nén khí và hệ thống liên quan tại nhà máy khách hàng
-          </p>
-          <p>
-            - Báo cáo định kỳ công việc hàng ngày, công tác sửa chữa, bảo trì, bảo dưỡng máy nén khí
-            và trang thiết bị liên quan theo yêu cầu
-          </p>
-          <p>- Thi công, lắp đặt hệ thống máy nén khí bên trong nhà máy khi có yêu cầu</p>
-          <p>
-            - Các công việc khác liên quan đến máy nén khí và các trang thiết bị đi kèm khi có yêu
-            cầu
-          </p>
-          <p>- Thời gian và địa điểm làm việc:</p>
-          <ul>
-            <li>
-              Địa điểm làm việc: Số 37 Nguyễn Cơ Thạch, Phường An Lợi Đông, Thành phố Thủ Đức, Thành
-              phố Hồ Chí Minh
-            </li>
-            <li>
-              <strong>Thời gian làm việc: 8:00 - 17:00, từ Thứ Hai đến Thứ Sáu</strong>
-            </li>
-          </ul>
+          {description && description !== 'None' ? description : 'Liên hệ để biết thêm thông tin'}
         </div>
       </div>
       <div className="text-start">
         <h2 className="text-[24px] font-semibold py-4">Yêu cầu công việc</h2>
         <div className="mb-2 text-[14px] font-normal break-words text-[#777779] text-description">
-          <p>- Nam, dưới 30 tuổi</p>
-          <p>
-            - Tốt nghiệp Trung cấp, Cao Đẳng, Đại Học liên quan về Điện, Điện Tử, Điện Điều khiển,
-            Điện Công Nghiệp (chấp nhận ứng viên mới tốt nghiệp)
-          </p>
-          <p>
-            - Chịu khó, cẩn trọng, tinh thần làm việc nghiêm túc, ham học hỏi, hoạt bát, có khả năng
-            làm việc nhóm hiệu quả
-          </p>
-          <p>- Kỹ năng xử lý sự cố, vấn đề</p>
-          <p>- Kỹ năng báo cáo, truyền đạt thông tin</p>
-          <p>- Có thể tăng ca ngoài giờ làm việc, cuối tuần (khi có yêu cầu)</p>
-          <p>
-            - Ưu tiên ứng viên có bằng lái xe ô tô, từng có kinh nghiệm làm việc ở vị trí tương
-            đương hoặc liên quan đến lĩnh vực kỹ thuật
-          </p>
+          {requirements && requirements !== 'None'
+            ? requirements
+            : 'Liên hệ để biết thêm thông tin'}
         </div>
       </div>
       <div className="text-start">
         <h2 className="text-[24px] font-semibold py-4">Quyền lợi</h2>
         <div className="mb-2 text-[14px] font-normal break-words text-[#777779] text-description">
-          <p>
-            - Mức lương từ 9 - 17 triệu (tùy thuộc vào kỹ năng và kinh nghiệm, được thỏa thuận cụ
-            thể trong buổi phỏng vấn).
-          </p>
-          <p>
-            - Môi trường làm việc chuyên nghiệp, năng động và thân thiện theo tiêu chuẩn của Công ty
-            Nhật Bản.
-          </p>
-          <p>
-            - Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp, … theo quy định Luật Việt Nam,
-            bảo hiểm sức khỏe và tai nạn 24/7.
-          </p>
-          <p>- Du lịch công ty hàng năm.</p>
-          <p>- Khám sức khỏe định kỳ tại phòng khám hoặc bệnh viện quốc tế một lần mỗi năm.</p>
-          <p>
-            - Chính sách trả lương, tăng ca tuân thủ theo quy định Luật Việt Nam, cùng với trợ cấp
-            lương thưởng và tăng lương theo quy định của Công ty và đánh giá năng lực hàng năm.
-          </p>
-          <p>- Được đào tạo kiến thức chuyên ngành.</p>
-          <p>
-            - Được trang bị đầy đủ phương tiện và dụng cụ bảo hộ lao động để đảm bảo an toàn công
-            việc.
-          </p>
+          {right ? (
+            right
+          ) : (
+            <>
+              <p>
+                - Mức lương từ 9 - 17 triệu (tùy thuộc vào kỹ năng và kinh nghiệm, được thỏa thuận
+                cụ thể trong buổi phỏng vấn).
+              </p>
+              <p>
+                - Môi trường làm việc chuyên nghiệp, năng động và thân thiện theo tiêu chuẩn của
+                Công ty Nhật Bản.
+              </p>
+              <p>
+                - Bảo hiểm xã hội, Bảo hiểm y tế, Bảo hiểm thất nghiệp, … theo quy định Luật Việt
+                Nam, bảo hiểm sức khỏe và tai nạn 24/7.
+              </p>
+              <p>- Du lịch công ty hàng năm.</p>
+              <p>- Khám sức khỏe định kỳ tại phòng khám hoặc bệnh viện quốc tế một lần mỗi năm.</p>
+              <p>
+                - Chính sách trả lương, tăng ca tuân thủ theo quy định Luật Việt Nam, cùng với trợ
+                cấp lương thưởng và tăng lương theo quy định của Công ty và đánh giá năng lực hàng
+                năm.
+              </p>
+              <p>- Được đào tạo kiến thức chuyên ngành.</p>
+              <p>
+                - Được trang bị đầy đủ phương tiện và dụng cụ bảo hộ lao động để đảm bảo an toàn
+                công việc.
+              </p>
+            </>
+          )}
         </div>
       </div>
       <div className="text-start">
         <h2 className="text-[24px] font-semibold py-4">Địa điểm làm việc</h2>
         <div className="mb-2 text-[14px] font-normal break-words text-[#777779] text-description">
-          <p>Số 37 Nguyễn Cơ Thạch, Phường An Lợi Đông, Thủ Đức</p>
+          <p>
+            {place ? place : ''} - {city ? city : ''}
+          </p>
         </div>
       </div>
       <div className="mt-6">

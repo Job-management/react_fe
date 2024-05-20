@@ -32,6 +32,9 @@ const PostDetailHeader = ({
           alt="logo"
           className="relative rounded w-[120px] h-[120px] object-contain"
           src={(images && images[0]?.src) || LogoDefault}
+          onError={(e) => {
+            e.currentTarget.src = LogoDefault;
+          }}
         />
         <div className="md:ml-7 w-full">
           <a>

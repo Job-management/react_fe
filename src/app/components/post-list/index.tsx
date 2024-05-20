@@ -20,7 +20,7 @@ const PostList = () => {
     {
       key: '2',
       label: 'Việc làm VIP ($1000+)',
-      // children: <PostPreview />,
+      children: 'Comming soon',
     },
   ];
   return (

@@ -5,13 +5,6 @@ import PostRecommend from '@components/post-recommend';
 import { usePost } from '@store/post/post.selector';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-const items: TabsProps['items'] = [
-  {
-    key: '1',
-    label: 'Chi tiết tuyển dụng',
-    children: <PostDetailBody />,
-  },
-];
 
 const Post = () => {
   const { onGetPostById, postData } = usePost();
@@ -21,6 +14,30 @@ const Post = () => {
     if (!id) return;
     onGetPostById({ id });
   }, [id]);
+
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: 'Chi tiết tuyển dụng',
+      children: (
+        <PostDetailBody
+          probationTime={postData?.probationTime}
+          time={postData?.time}
+          sexual={postData?.sexual}
+          description={postData?.description}
+          numberEmployees={postData?.numberEmployees}
+          requirements={postData?.requirements}
+          workWay={postData?.workWay}
+          age={postData?.age}
+          education={postData?.education}
+          experience={postData?.experience}
+          right={postData?.right}
+          place={postData?.place}
+          city={postData?.city}
+        />
+      ),
+    },
+  ];
 
   return (
     <div className="px-10 bg-[#fafaff] pt-5">
