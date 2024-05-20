@@ -29,7 +29,7 @@ declare namespace Types {
     type: string;
     contact: string;
   }
-  interface IPostResponse {
+  interface IAllPostResponse {
     error?: boolean;
     message: string;
     data: IDataPostResponse[];
@@ -37,5 +37,25 @@ declare namespace Types {
     result?: ILoginResultProperty;
     timestamp?: number;
     stack?: string;
+    totalSize?: number;
+  }
+  interface IGetPostByIDRequest {
+    id: string;
+  }
+  interface IGetPostByIdResponse {
+    error?: boolean;
+    message: string;
+    data: IDataPostResponse;
+    code: number;
+    result?: ILoginResultProperty;
+    timestamp?: number;
+    stack?: string;
+  }
+  interface IGetAllPostRequest {
+    page?: number;
+    limit?: number;
+    search?: string;
+    address?: string;
+    major_category_id?: number;
   }
 }
