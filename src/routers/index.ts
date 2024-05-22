@@ -4,6 +4,7 @@ import Login from '@pages/Login';
 import NotFoundPage from '@pages/NotFoundPage';
 import LayoutDefault from 'layout/main';
 import Post from '@pages/post';
+import SearchJob from '@pages/search-job';
 const Routers: Types.IRoute[] = [
   {
     key: 1,
@@ -24,6 +25,14 @@ const Routers: Types.IRoute[] = [
     key: 3,
     path: routes.POST_DETAIL,
     component: Post,
+    isProtected: true,
+    isAdmin: false,
+    layout: LayoutDefault,
+  },
+  {
+    key: 4,
+    path: routes.POST_SEARCH,
+    component: SearchJob,
     isProtected: true,
     isAdmin: false,
     layout: LayoutDefault,

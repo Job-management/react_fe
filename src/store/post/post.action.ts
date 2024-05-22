@@ -6,8 +6,6 @@ import { POST_API_URL } from '@apis/endpoint';
 import { Modal } from 'antd';
 import { objectToQueryString } from '@utils/helpers/request';
 
-// import { objectToQueryString } from 'utils/request';
-
 export const getAllPost = createAsyncThunk(
   'post/getall',
   async (searchQuery: Types.IGetAllPostRequest, { rejectWithValue }) => {
@@ -38,6 +36,54 @@ export const getPostById = createAsyncThunk(
     try {
       const response = await apiUser.get<Types.IGetPostByIdResponse>(
         POST_API_URL.POST + payload.id,
+      );
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const getAllPostSearch = createAsyncThunk(
+  'post/getallSearch',
+  async (searchQuery: Types.IGetAllPostRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<Types.IAllPostResponse>(
+        POST_API_URL.POST + '?' + objectToQueryString<Types.IGetAllPostRequest>(searchQuery),
+      );
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const getAllPostSearchMore = createAsyncThunk(
+  'post/getallSearchMore',
+  async (searchQuery: Types.IGetAllPostRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<Types.IAllPostResponse>(
+        POST_API_URL.POST + '?' + objectToQueryString<Types.IGetAllPostRequest>(searchQuery),
       );
       return {
         data: response.data,
