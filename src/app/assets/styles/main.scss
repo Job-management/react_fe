@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+html {
+  scroll-behavior: smooth !important;
+}
 .ant-btn-primary {
   background-color: #1677ff;
   &:hover {

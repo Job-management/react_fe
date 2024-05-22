@@ -58,4 +58,11 @@ declare namespace Types {
     address?: string;
     major_category_id?: number;
   }
+  interface ISearchPost {
+    search?: string;
+    location?: string;
+    major?: string;
+    salary?: string;
+    rank?: string;
+  }
 }

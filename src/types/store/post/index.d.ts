@@ -4,6 +4,7 @@ declare namespace Types {
     loading: boolean;
     postsList: IDataPostResponse[];
     postData: IDataPostResponse | undefined;
+    postDataSearch: IDataPostResponse[] | [];
     postTotalSize: number | undefined;
   }
 }

@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import { Table } from 'utils/helpers/table';
 
-import { getAllPost, getPostById } from './post.action';
+import { getAllPost, getAllPostSearch, getAllPostSearchMore, getPostById } from './post.action';
 const initialState: Types.IPostState = {
   actionType: '',
   loading: false,
   postsList: [],
   postData: undefined,
+  postDataSearch: [],
   postTotalSize: 0,
 };
 
@@ -33,6 +34,38 @@ const PostSlice = createSlice({
       state.loading = false;
       state.actionType = action.type;
       state.postsList = [];
+    });
+
+    // get all search
+    builder.addCase(getAllPostSearch.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(getAllPostSearch.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+      state.postDataSearch = action.payload.data.data;
+      state.postTotalSize = action.payload.data.totalSize;
+    });
+    builder.addCase(getAllPostSearch.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+
+    // get all search more
+    builder.addCase(getAllPostSearchMore.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(getAllPostSearchMore.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+      state.postDataSearch = [...state.postDataSearch, ...action.payload.data.data];
+      state.postTotalSize = action.payload.data.totalSize;
+    });
+    builder.addCase(getAllPostSearchMore.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
     });
 
     // get post by id

@@ -61,6 +61,17 @@ export const WrapperStyled = styled.div`
       display: flex;
     }
   }
+  .information {
+    display: flex;
+    flex-direction: column;
+    bottom: 8px;
+    right: 16px;
+    position: absolute;
+    .information__item {
+      display: flex;
+      justify-content: end;
+    }
+  }
   .top-icon {
     display: block;
     bottom: 5px;
