@@ -4,6 +4,7 @@ import FormSelect from '@components/form/FormSelect';
 import { MAJOR_CATEGORY } from '@utils/constants';
 import { objectToQueryString } from '@utils/helpers/request';
 import { Button, Col, Form, Row } from 'antd';
+import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './styled';
@@ -18,10 +19,13 @@ const MainBox = ({ className }: any) => {
     rank: string;
   }>();
   const { handleSubmit } = form;
-  const handleSearch = (data: Types.ISearchPost) => {
-    const query = objectToQueryString(data);
-    navigate('/search-job?' + query);
-  };
+  const handleSearch = useCallback(
+    (data: Types.ISearchPost) => {
+      const query = objectToQueryString(data);
+      navigate('/search-job?' + query);
+    },
+    [form],
+  );
   return (
     <Wrapper className={className}>
       <div className="main-box__top">
@@ -56,6 +60,7 @@ const MainBox = ({ className }: any) => {
                   allowClear
                   name="major"
                   options={MAJOR_CATEGORY}
+                  virtual={false}
                   placeholder="Tất cả ngành nghề"
                 />
               </Col>
