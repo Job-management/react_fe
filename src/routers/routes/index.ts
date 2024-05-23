@@ -4,5 +4,7 @@ export default {
   SIGNUP: '/signup',
   POST_DETAIL: '/post/:id',
   POST_SEARCH: '/search-job',
+  PROFILE_USER: '/profile-user/:id',
+  ADMIN: '/admin',
   NOTFOUND: '*',
 };
