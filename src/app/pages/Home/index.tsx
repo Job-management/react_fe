@@ -1,13 +1,13 @@
-import MainBox from '@components/main-box';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Wrapper } from './styled';
 import Slide_1 from '@assets/images/slide_1.png';
 import Slide_2 from '@assets/images/slide_2.png';
 import GridComponent from '@components/common/Grid';
-import { topCompany, banner } from '@utils/constants';
-import PostList from '@components/post-list';
 import MailSubscribe from '@components/mail-subscribe';
+import MainBox from '@components/main-box';
+import PostList from '@components/post-list';
+import { banner, topCompany } from '@utils/constants';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Wrapper } from './styled';
 
 const Home = () => {
   return (
