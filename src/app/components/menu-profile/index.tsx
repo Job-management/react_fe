@@ -17,7 +17,7 @@ const MenuProfile = () => {
   return (
     <div className="p-0 transition-all z-10 absolute right-2 top-16 bg-white rounded-lg p-2 shadow-[0px_1px_7px_0px_#7E818E52]">
       <Link
-        to={`/profile-user/${USER_DATA.id}`}
+        to={USER_DATA.role === 'user' ? `/profile-user/${USER_DATA.id}` : '/admin'}
         className="flex items-center p-2 hover:bg-[#f3f4f6] dark:hover:bg-slate-200 rounded-lg mb-2">
         <div className="user-avatar w-[32px]  h-[32px] mr-4">
           <img

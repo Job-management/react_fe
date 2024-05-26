@@ -1,5 +1,5 @@
 import {
-  AppstoreOutlined,
+  AimOutlined,
   CheckCircleOutlined,
   CreditCardOutlined,
   HeartOutlined,
@@ -26,7 +26,7 @@ const items: MenuItem[] = [
   {
     key: 'ai',
     label: 'AI Career Connect',
-    icon: <AppstoreOutlined />,
+    icon: <AimOutlined />,
     children: [
       { key: '3', label: 'VietnamSalary', icon: <MoneyCollectOutlined /> },
       { key: '4', label: 'Career opportunity', icon: <RiseOutlined /> },

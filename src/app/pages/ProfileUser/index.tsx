@@ -2,6 +2,7 @@ import NavBarUser from '@components/navbar-user';
 import { WrapperStyled } from './styled';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import EditInfo from '@components/edit-info';
+import EditSkill from '@components/edit-skill';
 const ProfileUser = () => {
   const [content, setContent] = useState<ReactNode>(null);
   const [menuId, setMenuId] = useState<string>('1');
@@ -11,7 +12,7 @@ const ProfileUser = () => {
         setContent(<EditInfo />);
         break;
       case '2':
-        setContent(<p>2</p>);
+        setContent(<EditSkill />);
         break;
       case '3':
         setContent(<p>3</p>);

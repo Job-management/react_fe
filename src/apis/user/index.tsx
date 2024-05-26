@@ -1,4 +1,10 @@
-import { jwtHelper, STORAGE, getLocalStorage } from '@utils/helpers';
+import {
+  jwtHelper,
+  STORAGE,
+  getLocalStorage,
+  setLocalStorage,
+  removeLocalStorage,
+} from '@utils/helpers';
 import { Modal } from 'antd';
 import axios, { AxiosResponse } from 'axios';
 
@@ -23,19 +29,40 @@ apiUser.interceptors.request.use(
   },
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const refreshAccessToken = async (): Promise<any> => {
+  const refresh_token = getLocalStorage(STORAGE.USER_REFRESH);
+  const data = {
+    refresh_token: refresh_token,
+  };
+  return await axios.post('/auth/refresh', data);
+};
+
 apiUser.interceptors.response.use(
   (response: AxiosResponse) => {
     return response;
   },
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
     if (error?.response?.status === 401) {
-      Modal.error({
-        title: 'アクティブなセッションの有効期限が切れました。',
-        onOk: () => {
-          localStorage.clear();
-          window.location.href = '/home';
-        },
-      });
+      originalRequest._retry = true;
+      try {
+        const token = await refreshAccessToken();
+        setLocalStorage(STORAGE.USER_TOKEN, token?.access_token);
+        setLocalStorage(STORAGE.USER_REFRESH, token?.refresh_token);
+        return apiUser(originalRequest);
+      } catch (error) {
+        removeLocalStorage(STORAGE.USER_TOKEN);
+        removeLocalStorage(STORAGE.USER_REFRESH);
+        window.location.href = '/home';
+        Modal.error({
+          title: 'Your token was expired',
+          onOk: () => {
+            localStorage.clear();
+            window.location.href = '/home';
+          },
+        });
+      }
     }
     // error common
     if (error?.response?.status === 403) {
