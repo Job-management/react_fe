@@ -1,7 +1,6 @@
+import { jwtHelper, STORAGE, getLocalStorage } from '@utils/helpers';
 import { Modal } from 'antd';
 import axios, { AxiosResponse } from 'axios';
-import { TOKEN } from '@utils/constants/auth';
-import { jwtHelper } from '@utils/helpers';
 
 const API_BASE_URL = process.env.REACT_APP_URL_SERVICE_ABC;
 const apiUser = axios.create({
@@ -10,7 +9,7 @@ const apiUser = axios.create({
 
 apiUser.interceptors.request.use(
   (config) => {
-    const stringifiedToken = localStorage.getItem(TOKEN.ACCESS_TOKEN_KEY) || '';
+    const stringifiedToken = getLocalStorage(STORAGE.USER_TOKEN) || '';
     const bearerToken = jwtHelper.getBearerToken(stringifiedToken);
 
     if (config.headers) {
@@ -34,7 +33,7 @@ apiUser.interceptors.response.use(
         title: 'アクティブなセッションの有効期限が切れました。',
         onOk: () => {
           localStorage.clear();
-          window.location.href = '/login';
+          window.location.href = '/home';
         },
       });
     }
@@ -44,7 +43,7 @@ apiUser.interceptors.response.use(
         title: 'This activity not in your permission',
         onOk: () => {
           localStorage.clear();
-          window.location.href = '/login';
+          window.location.href = '/home';
         },
       });
     }

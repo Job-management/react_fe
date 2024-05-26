@@ -7,4 +7,10 @@ const POST_API_URL = {
   POST: '/api/v1/crawl/',
 };
 
-export { BASE_API_URL, POST_API_URL };
+const USER_API_URL = {
+  CHANGE_PASSWORD: '/api/v1/auth/change-password',
+  PROFILE: '/api/v1/user',
+  UPDATE_PROFILE: '/api/v1/user/me',
+};
+
+export { BASE_API_URL, POST_API_URL, USER_API_URL };

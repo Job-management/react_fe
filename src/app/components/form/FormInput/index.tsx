@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Form } from 'antd';
+import { Form, Input } from 'antd';
 import { useController, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -57,7 +57,7 @@ const FormInput = ({
       label={label && <WrapperLabel>{label}</WrapperLabel>}
       validateStatus={error ? 'error' : ''}
       help={error?.message}>
-      <input
+      <Input
         id={name}
         type={type}
         placeholder={placeholder}
