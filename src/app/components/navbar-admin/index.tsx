@@ -8,6 +8,7 @@ import {
   FacebookOutlined,
   MoneyCollectOutlined,
   RiseOutlined,
+  AimOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -21,12 +22,21 @@ const items: MenuItem[] = [
     icon: <AreaChartOutlined />,
   },
   {
-    key: 'ai',
-    label: 'AI Career Connect',
+    key: 'management',
+    label: 'Management',
     icon: <AppstoreOutlined />,
     children: [
-      { key: '1', label: 'VietnamSalary', icon: <MoneyCollectOutlined /> },
-      { key: '2', label: 'Job opportunity', icon: <RiseOutlined /> },
+      { key: '1', label: 'User', icon: <MoneyCollectOutlined /> },
+      { key: '2', label: 'Post', icon: <RiseOutlined /> },
+    ],
+  },
+  {
+    key: 'ai',
+    label: 'AI Career Connect',
+    icon: <AimOutlined />,
+    children: [
+      { key: '3', label: 'VietnamSalary', icon: <MoneyCollectOutlined /> },
+      { key: '4', label: 'Job opportunity', icon: <RiseOutlined /> },
     ],
   },
   {
@@ -37,12 +47,12 @@ const items: MenuItem[] = [
     label: 'Crawl data',
     icon: <ChromeOutlined />,
     children: [
-      { key: '3', label: 'Facebook', icon: <FacebookOutlined /> },
-      { key: '4', label: 'Vieclam24h', icon: <CodeSandboxOutlined /> },
-      { key: '5', label: 'Topdev', icon: <DingtalkOutlined /> },
+      { key: '5', label: 'Facebook', icon: <FacebookOutlined /> },
+      { key: '6', label: 'Vieclam24h', icon: <CodeSandboxOutlined /> },
+      { key: '7', label: 'Topdev', icon: <DingtalkOutlined /> },
     ],
   },
-  { key: '6', label: 'Giao dịch', icon: <CreditCardOutlined /> },
+  { key: '8', label: 'Giao dịch', icon: <CreditCardOutlined /> },
 ];
 
 interface Props {
