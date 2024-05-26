@@ -13,7 +13,8 @@
     "incorrect_end_time": "The course end date and time is set before the course start date and time.",
     "required_limit_date": "Enter the date. (time can be omitted)",
     "remove_extension": "An extension cannot be changed",
-    "invalid_email": "Invalid email format."
+    "invalid_email": "Invalid email format.",
+    "password_not_match": "Password doesn't match."
   },
   "COURSE_ALREADY_EXIST": "A course with the same name already exists",
   "ERROR_REGISTER_UNIT_ALREADY_EXIST": "A unit with the same name already exists in the course.",

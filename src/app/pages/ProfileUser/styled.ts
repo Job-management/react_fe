@@ -9,5 +9,6 @@ export const WrapperStyled = styled.div`
   }
   .content {
     padding: 12px;
+    width: 100%;
   }
 `;
