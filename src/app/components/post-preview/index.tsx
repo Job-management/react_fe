@@ -4,14 +4,20 @@ import { useCallback } from 'react';
 import { WrapperStyled } from './styled';
 import { CalendarOutlined, HeartOutlined } from '@ant-design/icons';
 import { handleConvertTimestampToDate } from '@utils/helpers/date-time';
+import { useUser } from '@store/user/user.selector';
 interface Props {
   post: Types.IDataPostResponse;
   isSearch?: boolean;
+  isPostSave?: boolean;
 }
-const PostPreview = ({ post, isSearch = false }: Props) => {
+const PostPreview = ({ post, isSearch = false, isPostSave = false }: Props) => {
   const handleFormatDate = useCallback((timestamp: string) => {
     const date = new Date(Number(timestamp));
     return moment(date).fromNow();
+  }, []);
+  const { onAddUserSavePost } = useUser();
+  const handleSavePost = useCallback((postId: number) => {
+    onAddUserSavePost(postId);
   }, []);
   return (
     <WrapperStyled className="figure">
@@ -59,13 +65,28 @@ const PostPreview = ({ post, isSearch = false }: Props) => {
       </div>
       {isSearch ? (
         <div className="information">
-          <div className="information__item hover:text-red-500 cursor-pointer">
+          <div
+            className="information__item hover:text-red-500 cursor-pointer"
+            onClick={() => handleSavePost(post?.id)}>
             <HeartOutlined className="mr-2" /> Lưu bài viết
           </div>
           <div className="information__item">
             <CalendarOutlined className="mr-2" />
             Cập nhật: {handleConvertTimestampToDate(post.time, 'MINI')}
           </div>
+        </div>
+      ) : isPostSave ? (
+        <div className="information">
+          <div
+            className="information__item hover:text-red-500 cursor-pointer"
+            onClick={() => handleSavePost(post?.id)}>
+            <HeartOutlined className="mr-2" /> Hủy lưu bài viết
+          </div>
+          {Number.isNaN(Number(post.time)) ? (
+            <span className="top">Top</span>
+          ) : (
+            <p>{handleFormatDate(post.time)}</p>
+          )}{' '}
         </div>
       ) : (
         <div className="top-icon">

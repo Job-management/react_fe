@@ -42,7 +42,7 @@ const SearchJob = () => {
     }, 2000);
   }, [page]);
 
-  const handleShowResultSumary = useCallback(() => {
+  const handleShowResultSummary = useCallback(() => {
     const temp = ' việc làm ';
     const item = [];
     const major = searchParams.get('major');
@@ -51,7 +51,7 @@ const SearchJob = () => {
     if (searchParams.get('location')) item.push(searchParams.get('location'));
     if (major) item.push(major_item?.label);
     return postTotalSize + temp + item.join(' / ');
-  }, []);
+  }, [postTotalSize]);
 
   const handleToTop = useCallback(() => {
     if (!containerRef.current) return;
@@ -68,7 +68,7 @@ const SearchJob = () => {
         <Toolbar />
       </div>
       <div className="job-container">
-        <h2 className="summary">{handleShowResultSumary()}</h2>
+        <h2 className="summary">{handleShowResultSummary()}</h2>
         {!postTotalSize ? (
           <div>Không tìm thấy dữ liệu phù hợp</div>
         ) : (

@@ -62,3 +62,46 @@ export const MAJOR_CATEGORY = [
   { value: 47, label: 'Y sinh' },
   { value: 48, label: 'Vật lý' },
 ];
+
+export const SKILL_CATEGORY = [
+  { value: 1, label: 'ReactJS' },
+  { value: 2, label: 'NextJS' },
+  { value: 3, label: 'Java' },
+  { value: 4, label: 'NodeJS' },
+  { value: 5, label: 'JS' },
+  { value: 6, label: 'Python' },
+  { value: 7, label: 'Devops' },
+  { value: 8, label: 'C#' },
+  { value: 9, label: 'MySQL' },
+  { value: 10, label: 'HTML/CSS' },
+  { value: 11, label: 'Angular' },
+  { value: 12, label: 'Vue.js' },
+  { value: 13, label: 'PHP' },
+  { value: 14, label: 'ASP.NET' },
+  { value: 15, label: 'MongoDB' },
+  { value: 16, label: 'Django' },
+  { value: 17, label: 'Ruby on Rails' },
+  { value: 18, label: 'Swift' },
+  { value: 19, label: 'Kotlin' },
+  { value: 20, label: 'Flutter' },
+  { value: 21, label: 'AWS' },
+  { value: 22, label: 'Azure' },
+  { value: 23, label: 'GCP' },
+  { value: 24, label: 'Docker' },
+  { value: 25, label: 'Kubernetes' },
+  { value: 26, label: 'Terraform' },
+  { value: 27, label: 'Ansible' },
+  { value: 28, label: 'Jenkins' },
+  { value: 29, label: 'Git' },
+  { value: 30, label: 'CI/CD' },
+  // Thêm các kỹ năng khác tùy ý vào đây
+];
+
+export const LEVEL_CATEGORY = [
+  { value: '1', label: 'Intern' },
+  { value: '2', label: 'Fresher' },
+  { value: '3', label: 'Junior' },
+  { value: '4', label: 'Middle' },
+  { value: '5', label: 'Senior' },
+  { value: '6', label: 'Technical leader' },
+];

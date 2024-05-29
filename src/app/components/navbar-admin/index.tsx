@@ -9,6 +9,8 @@ import {
   MoneyCollectOutlined,
   RiseOutlined,
   AimOutlined,
+  UserOutlined,
+  FileTextOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -26,8 +28,8 @@ const items: MenuItem[] = [
     label: 'Management',
     icon: <AppstoreOutlined />,
     children: [
-      { key: '1', label: 'User', icon: <MoneyCollectOutlined /> },
-      { key: '2', label: 'Post', icon: <RiseOutlined /> },
+      { key: '1', label: 'User', icon: <UserOutlined /> },
+      { key: '2', label: 'Post', icon: <FileTextOutlined /> },
     ],
   },
   {
