@@ -7,6 +7,7 @@ export const WrapperStyled = styled.div`
   border-radius: 10px;
   position: relative;
   margin-bottom: 16px;
+  max-height: 300px;
   .image {
     display: flex;
     flex: 0 0 79px;

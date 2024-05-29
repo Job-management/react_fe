@@ -72,3 +72,91 @@ export const updateProfile = createAsyncThunk(
     }
   },
 );
+
+export const getUserSkill = createAsyncThunk(
+  'user/getUserSkill',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<any>(USER_API_URL.USER_SKILL);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const updateUserSkill = createAsyncThunk(
+  'user/updateUserSkill',
+  async (payload: Types.IUpdateSkill, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.put<any>(USER_API_URL.USER_SKILL, payload);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const addUserSavePost = createAsyncThunk(
+  'user/addUserSavePost',
+  async (postId: number, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.post<any>(USER_API_URL.USER_SAVE_POST + '/' + postId);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const getUserSavePost = createAsyncThunk(
+  'user/getUserSavePost',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<any>(USER_API_URL.USER_SAVE_POST);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);

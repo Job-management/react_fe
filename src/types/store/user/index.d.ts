@@ -4,5 +4,7 @@ declare namespace Types {
     actionType: string;
     loading: boolean;
     profile: any;
+    userSkill: any;
+    savePost: any;
   }
 }

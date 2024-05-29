@@ -50,8 +50,15 @@ export const WrapperStyled = styled.form`
         display: flex;
         justify-content: space-between;
         .field {
-          width: auto;
+          min-width: 360px;
           margin-right: 8px;
+          label {
+            width: 140px;
+            text-align: start;
+          }
+          input {
+            width: 100%;
+          }
         }
       }
     }

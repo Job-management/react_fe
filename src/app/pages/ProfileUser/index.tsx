@@ -1,9 +1,12 @@
-import NavBarUser from '@components/navbar-user';
-import { WrapperStyled } from './styled';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
 import EditInfo from '@components/edit-info';
 import EditSkill from '@components/edit-skill';
+import NavBarUser from '@components/navbar-user';
+import PostSave from '@components/post-save';
+import { useUser } from '@store/user/user.selector';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { WrapperStyled } from './styled';
 const ProfileUser = () => {
+  const { onGetUserSavePost } = useUser();
   const [content, setContent] = useState<ReactNode>(null);
   const [menuId, setMenuId] = useState<string>('1');
   const handleRenderContent = useCallback(() => {
@@ -14,8 +17,9 @@ const ProfileUser = () => {
       case '2':
         setContent(<EditSkill />);
         break;
-      case '3':
-        setContent(<p>3</p>);
+      case '5':
+        onGetUserSavePost();
+        setContent(<PostSave />);
         break;
       default:
         break;

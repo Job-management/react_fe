@@ -9,4 +9,11 @@ declare namespace Types {
     birthday?: string;
     phone?: string;
   }
+  interface IUpdateSkill {
+    major: string;
+    years_exp: number;
+    skill: Array<string>;
+    city: string;
+    level: string;
+  }
 }
