@@ -42,6 +42,7 @@ const Post = () => {
   return (
     <div className="px-10 bg-[#fafaff] pt-5">
       <PostDetailHeader
+        id={postData?.id}
         job={postData?.job}
         company={postData?.company}
         salary={postData?.salary}

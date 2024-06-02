@@ -54,7 +54,7 @@ apiUser.interceptors.response.use(
       } catch (error) {
         removeLocalStorage(STORAGE.USER_TOKEN);
         removeLocalStorage(STORAGE.USER_REFRESH);
-        window.location.href = '/home';
+        removeLocalStorage(STORAGE.USER_DATA);
         Modal.error({
           title: 'Your token was expired',
           onOk: () => {

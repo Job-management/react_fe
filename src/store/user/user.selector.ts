@@ -9,11 +9,13 @@ import {
   updateUserSkill,
   addUserSavePost,
   getUserSavePost,
+  getUserByAdmin,
+  deleteUserByAdmin,
 } from './user.action';
 
 export const useUser = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, actionType, profile, userSkill, savePost } = useSelector(
+  const { loading, actionType, profile, userSkill, savePost, userList } = useSelector(
     (state: Types.IStoreState) => state.user,
     shallowEqual,
   );
@@ -57,6 +59,17 @@ export const useUser = () => {
     return await dispatch(getUserSavePost());
   }, [dispatch]);
 
+  const onGetUserByAdmin = useCallback(async () => {
+    return await dispatch(getUserByAdmin());
+  }, [dispatch]);
+
+  const onDeleteUserByAdmin = useCallback(
+    async (id: string) => {
+      return await dispatch(deleteUserByAdmin(id));
+    },
+    [dispatch],
+  );
+
   return {
     onChangePassword,
     onGetProfile,
@@ -65,6 +78,9 @@ export const useUser = () => {
     onUpdateUserSkill,
     onAddUserSavePost,
     onGetUserSavePost,
+    onGetUserByAdmin,
+    onDeleteUserByAdmin,
+    userList,
     savePost,
     userSkill,
     loading,

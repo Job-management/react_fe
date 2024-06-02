@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { Loading } from './components/common/Loading';
 
 import routes from '../routers';
-// import { ProtectedRoute } from './router/ProtectedRoute';
+import ProtectedRoute from '../routers/handlers/ProtectedRoute';
 
 function App() {
   return (
@@ -28,17 +28,16 @@ function App() {
             }
           />
           {routes.map((route) => {
-            const Protected = Fragment;
+            const Protected = route.isProtected ? ProtectedRoute : Fragment;
             const Layout = route.layout ?? Fragment;
             const Component = route.component;
-            // const isAdmin = route.isAdmin;
+            const isAdmin = route.isAdmin;
             return (
               <Route
                 key={route.key}
                 path={route.path}
                 element={
-                  // <Protected isAdmin={isAdmin}>
-                  <Protected>
+                  <Protected isAdmin={isAdmin}>
                     <Layout>
                       <Suspense fallback={<Loading size="large" />}>
                         <Component />

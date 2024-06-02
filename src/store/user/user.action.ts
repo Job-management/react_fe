@@ -160,3 +160,48 @@ export const getUserSavePost = createAsyncThunk(
     }
   },
 );
+
+export const getUserByAdmin = createAsyncThunk(
+  'user/getUserByAdmin',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<any>(USER_API_URL.USER);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const deleteUserByAdmin = createAsyncThunk(
+  'user/deleteUserByAdmin',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      debugger;
+      const response = await apiUser.delete<any>(USER_API_URL.USER + '/' + id);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
