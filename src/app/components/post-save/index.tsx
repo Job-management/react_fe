@@ -14,11 +14,14 @@ const PostSave = () => {
       <div className="container">
         {savePost?.map((item: Types.IDataPostResponse) => {
           return (
-            <PostPreview
-              key={item.id}
-              post={item}
-              isPostSave={true}
-            />
+            <div
+              className="post"
+              key={item.id}>
+              <PostPreview
+                post={item}
+                isPostSave={true}
+              />
+            </div>
           );
         })}
       </div>

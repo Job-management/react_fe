@@ -6,5 +6,6 @@ declare namespace Types {
     profile: any;
     userSkill: any;
     savePost: any;
+    userList: any;
   }
 }

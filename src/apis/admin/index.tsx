@@ -32,7 +32,7 @@ apiAdmin.interceptors.response.use(
         title: 'アクティブなセッションの有効期限が切れました。',
         onOk: () => {
           localStorage.clear();
-          window.location.href = '/login';
+          window.location.href = '/home';
         },
       });
     }

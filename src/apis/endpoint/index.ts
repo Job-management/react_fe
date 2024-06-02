@@ -13,6 +13,7 @@ const USER_API_URL = {
   UPDATE_PROFILE: '/api/v1/user/me',
   USER_SKILL: '/api/v1/user/skill',
   USER_SAVE_POST: '/api/v1/user/save-post',
+  USER: '/api/v1/user',
 };
 
 export { BASE_API_URL, POST_API_URL, USER_API_URL };

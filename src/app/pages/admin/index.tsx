@@ -1,14 +1,18 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { WrapperStyled } from './styled';
 import NavBarAdmin from '@components/navbar-admin';
+import ManageUser from '@components/manage-user';
 
 const Admin = () => {
   const [content, setContent] = useState<ReactNode>(null);
-  const [menuId, setMenuId] = useState<string>('1');
+  const [menuId, setMenuId] = useState<string>('dashboard');
   const handleRenderContent = useCallback(() => {
     switch (menuId) {
+      case 'dashboard':
+        setContent(<p>Dashboard</p>);
+        break;
       case '1':
-        setContent(<p>1</p>);
+        setContent(<ManageUser />);
         break;
       case '2':
         setContent(<p>2</p>);

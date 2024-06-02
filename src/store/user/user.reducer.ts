@@ -8,6 +8,8 @@ import {
   updateProfile,
   updateUserSkill,
   getUserSavePost,
+  getUserByAdmin,
+  deleteUserByAdmin,
 } from './user.action';
 
 const initialState: Types.IUserState = {
@@ -16,6 +18,7 @@ const initialState: Types.IUserState = {
   profile: undefined,
   userSkill: undefined,
   savePost: undefined,
+  userList: undefined,
 };
 
 const UserSlice = createSlice({
@@ -120,6 +123,33 @@ const UserSlice = createSlice({
       state.actionType = action.type;
     });
     builder.addCase(getUserSavePost.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // GET ALL USER
+    builder.addCase(getUserByAdmin.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(getUserByAdmin.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userList = action.payload.data;
+      state.actionType = action.type;
+    });
+    builder.addCase(getUserByAdmin.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // DELETE USER
+    builder.addCase(deleteUserByAdmin.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(deleteUserByAdmin.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(deleteUserByAdmin.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
     });

@@ -5,7 +5,11 @@ import { HeartOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { dateTimeHelper } from '@utils/helpers';
 import LogoDefault from '@assets/images/logo-default.png';
 import IconChain from '@assets/images/icon-chain.png';
+import { useUser } from '@store/user/user.selector';
+import { useCallback } from 'react';
+
 interface Props {
+  id: number;
   job: string;
   company: string;
   salary: string;
@@ -16,6 +20,7 @@ interface Props {
   link: string;
 }
 const PostDetailHeader = ({
+  id,
   job,
   company,
   salary,
@@ -25,6 +30,10 @@ const PostDetailHeader = ({
   images,
   link,
 }: Props) => {
+  const { onAddUserSavePost } = useUser();
+  const handleSavePost = useCallback((postId: number) => {
+    onAddUserSavePost(postId);
+  }, []);
   return (
     <div className=" md:px-10 py-3 md:py-4 px-4 bg-white shadow-sd-12 rounded-sm mb-5 shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
       <div className="md:flex w-full items-start">
@@ -113,7 +122,10 @@ const PostDetailHeader = ({
                 </button>
                 <div className="flex justify-between w-auto order-1 md:order-2">
                   <button className="flex items-center justify-center py-3 px-auto text-[14px] rounded-sm w-full md:w-[152px] font-semibold md:mx-4 mr-3 border border-se-line !w-[44px] rounded-md border-0 bg-[#F5F1FF]">
-                    <HeartOutlined className="px-2 text-[18px]" />
+                    <HeartOutlined
+                      className="px-2 text-[18px]"
+                      onClick={() => handleSavePost(id)}
+                    />
                   </button>
                 </div>
               </div>
