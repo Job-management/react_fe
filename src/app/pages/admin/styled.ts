@@ -10,5 +10,7 @@ export const WrapperStyled = styled.div`
   .content {
     padding: 12px;
     width: 100%;
+    overflow: scroll;
+    height: calc(100vh - 74px);
   }
 `;

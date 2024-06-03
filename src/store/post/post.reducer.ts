@@ -2,7 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import { Table } from 'utils/helpers/table';
 
-import { getAllPost, getAllPostSearch, getAllPostSearchMore, getPostById } from './post.action';
+import {
+  getAllPost,
+  getAllPostSearch,
+  getAllPostSearchMore,
+  getAllCrawlPost,
+  getPostById,
+  updatePostStatus,
+} from './post.action';
 const initialState: Types.IPostState = {
   actionType: '',
   loading: false,
@@ -10,6 +17,7 @@ const initialState: Types.IPostState = {
   postData: undefined,
   postDataSearch: [],
   postTotalSize: 0,
+  postAdmin: [],
 };
 
 const PostSlice = createSlice({
@@ -52,6 +60,20 @@ const PostSlice = createSlice({
       state.actionType = action.type;
     });
 
+    builder.addCase(getAllCrawlPost.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(getAllCrawlPost.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+      state.postAdmin = action.payload.data.data;
+    });
+    builder.addCase(getAllCrawlPost.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+
     // get all search more
     builder.addCase(getAllPostSearchMore.pending, (state, action) => {
       state.loading = true;
@@ -83,6 +105,20 @@ const PostSlice = createSlice({
       state.loading = false;
       state.actionType = action.type;
       state.postData = undefined;
+    });
+
+    // update status post by id
+    builder.addCase(updatePostStatus.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(updatePostStatus.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(updatePostStatus.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
     });
   },
 });

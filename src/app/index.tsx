@@ -1,7 +1,31 @@
 import { ConfigProvider } from 'antd';
 import { Fragment, Suspense } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  TimeScale,
+  BarElement,
+} from 'chart.js';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  TimeScale,
+  Title,
+  Tooltip,
+  Legend,
+);
 // import 'app/assets/styles/main.scss';
 import { Loading } from './components/common/Loading';
 

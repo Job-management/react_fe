@@ -30,6 +30,28 @@ export const getAllPost = createAsyncThunk(
   },
 );
 
+export const getAllCrawlPost = createAsyncThunk(
+  'post/getAllCrawlPost',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.get<Types.IAllPostResponse>(POST_API_URL.POST_ADMIN);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
 export const getPostById = createAsyncThunk(
   'post/getPostById',
   async (payload: Types.IGetPostByIDRequest, { rejectWithValue }) => {
@@ -85,6 +107,31 @@ export const getAllPostSearchMore = createAsyncThunk(
       const response = await apiUser.get<Types.IAllPostResponse>(
         POST_API_URL.POST + '?' + objectToQueryString<Types.IGetAllPostRequest>(searchQuery),
       );
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const updatePostStatus = createAsyncThunk(
+  'post/updatePostStatus',
+  async (payload: Types.IUpdateStatus, { rejectWithValue }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response = await apiUser.put<any>(POST_API_URL.STATUS + payload.id, {
+        status: payload.status,
+      });
       return {
         data: response.data,
       };

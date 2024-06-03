@@ -5,22 +5,31 @@ import { WrapperStyled } from './styled';
 import { CalendarOutlined, HeartOutlined } from '@ant-design/icons';
 import { handleConvertTimestampToDate } from '@utils/helpers/date-time';
 import { useUser } from '@store/user/user.selector';
+import { usePost } from '@store/post/post.selector';
+import { Button } from 'antd';
+import useConfirmModal from 'app/hooks/useConfirmModal';
+
 interface Props {
   post: Types.IDataPostResponse;
   isSearch?: boolean;
   isPostSave?: boolean;
+  isAdmin?: boolean;
 }
-const PostPreview = ({ post, isSearch = false, isPostSave = false }: Props) => {
+const PostPreview = ({ post, isSearch = false, isPostSave = false, isAdmin = false }: Props) => {
+  const { showConfirm, ConfirmDialog } = useConfirmModal();
+
   const handleFormatDate = useCallback((timestamp: string) => {
     const date = new Date(Number(timestamp));
     return moment(date).fromNow();
   }, []);
   const { onAddUserSavePost } = useUser();
+  const { onUpdatePostStatus } = usePost();
   const handleSavePost = useCallback((postId: number) => {
     onAddUserSavePost(postId);
   }, []);
   return (
     <WrapperStyled className="figure">
+      <ConfirmDialog />
       <div className="image">
         <a
           target="_blank"
@@ -87,6 +96,36 @@ const PostPreview = ({ post, isSearch = false, isPostSave = false }: Props) => {
           ) : (
             <p>{handleFormatDate(post.time)}</p>
           )}{' '}
+        </div>
+      ) : isAdmin ? (
+        <div className="top-icon">
+          {post.status === 'DELETE' ? (
+            <Button
+              onClick={() =>
+                showConfirm(
+                  'Active post',
+                  `Do you sure you want to active this post`,
+                  () => onUpdatePostStatus({ id: post.id, status: 'ACTIVE' }),
+                  () => {},
+                  'Active',
+                )
+              }>
+              Active
+            </Button>
+          ) : (
+            <Button
+              onClick={() =>
+                showConfirm(
+                  'Delete post',
+                  `Do you sure you want to delete this post`,
+                  () => onUpdatePostStatus({ id: post.id, status: 'DELETE' }),
+                  () => {},
+                  'Delete',
+                )
+              }>
+              Delete
+            </Button>
+          )}
         </div>
       ) : (
         <div className="top-icon">

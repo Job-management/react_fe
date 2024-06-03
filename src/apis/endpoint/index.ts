@@ -5,6 +5,8 @@ const BASE_API_URL = {
 
 const POST_API_URL = {
   POST: '/api/v1/crawl/',
+  POST_ADMIN: '/api/v1/crawl/admin',
+  STATUS: '/api/v1/crawl/status/',
 };
 
 const USER_API_URL = {
@@ -16,4 +18,8 @@ const USER_API_URL = {
   USER: '/api/v1/user',
 };
 
-export { BASE_API_URL, POST_API_URL, USER_API_URL };
+const ANALYZE_API_URL = {
+  USER: '/api/v1/analyze/user',
+  CRAWL: '/api/v1/analyze/crawl',
+};
+export { BASE_API_URL, POST_API_URL, USER_API_URL, ANALYZE_API_URL };
