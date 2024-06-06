@@ -3,5 +3,6 @@ declare namespace Types {
     auth: Reducer<IAuthState>;
     post: Reducer<IPostState>;
     user: Reducer<IUserState>;
+    analyze: Reducer<IAnalyzeState>;
   }
 }

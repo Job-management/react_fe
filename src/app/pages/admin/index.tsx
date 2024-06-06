@@ -1,24 +1,47 @@
+import Dashboard from '@components/dashboard';
+import ManageUser from '@components/manage-user';
+import NavBarAdmin from '@components/navbar-admin';
+import { usePost } from '@store/post/post.selector';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { WrapperStyled } from './styled';
-import NavBarAdmin from '@components/navbar-admin';
-import ManageUser from '@components/manage-user';
+import AdminPost from '@components/admin-post';
+import CrawlViecLam24h from '@components/crawl/vieclam24h';
 
 const Admin = () => {
+  const { onGetAllCrawlPost } = usePost();
   const [content, setContent] = useState<ReactNode>(null);
   const [menuId, setMenuId] = useState<string>('dashboard');
+  useEffect(() => {
+    onGetAllCrawlPost();
+  }, []);
   const handleRenderContent = useCallback(() => {
     switch (menuId) {
       case 'dashboard':
-        setContent(<p>Dashboard</p>);
+        setContent(<Dashboard />);
         break;
       case '1':
         setContent(<ManageUser />);
         break;
       case '2':
-        setContent(<p>2</p>);
+        setContent(<AdminPost />);
         break;
       case '3':
-        setContent(<p>3</p>);
+        setContent(<p>VietnamSalary</p>);
+        break;
+      case '4':
+        setContent(<p>Job opportunity</p>);
+        break;
+      case '5':
+        setContent(<p>Facebook</p>);
+        break;
+      case '6':
+        setContent(<CrawlViecLam24h />);
+        break;
+      case '7':
+        setContent(<p>Topdev</p>);
+        break;
+      case '8':
+        setContent(<p>Giao dich</p>);
         break;
       default:
         break;

@@ -28,6 +28,7 @@ declare namespace Types {
     link: string;
     type: string;
     contact: string;
+    status: string;
   }
   interface IAllPostResponse {
     error?: boolean;
@@ -64,5 +65,9 @@ declare namespace Types {
     major?: string;
     salary?: string;
     rank?: string;
+  }
+  interface IUpdateStatus {
+    id: number;
+    status: string;
   }
 }

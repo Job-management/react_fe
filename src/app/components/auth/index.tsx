@@ -60,8 +60,6 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
 
   const onSubmitSignUp = useCallback(
     (data: Types.ISignUpRequest) => {
-      console.log(data);
-
       onSignUp(data).then(() => {
         Notification.success('Sign up successful');
         setActive(false);

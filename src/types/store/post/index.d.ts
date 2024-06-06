@@ -6,5 +6,6 @@ declare namespace Types {
     postData: IDataPostResponse | undefined;
     postDataSearch: IDataPostResponse[] | [];
     postTotalSize: number | undefined;
+    postAdmin: IDataPostResponse[] | [];
   }
 }
