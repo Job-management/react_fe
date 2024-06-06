@@ -22,4 +22,9 @@ const ANALYZE_API_URL = {
   USER: '/api/v1/analyze/user',
   CRAWL: '/api/v1/analyze/crawl',
 };
-export { BASE_API_URL, POST_API_URL, USER_API_URL, ANALYZE_API_URL };
+
+const CRAWL_API_URL = {
+  ON_CRAWL_DATA: '/crawl',
+};
+
+export { BASE_API_URL, POST_API_URL, USER_API_URL, ANALYZE_API_URL, CRAWL_API_URL };

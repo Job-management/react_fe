@@ -45,7 +45,6 @@ interface Props {
 
 const NavBarUser = ({ setMenuId }: Props) => {
   const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
     setMenuId(e.key);
   };
 

@@ -23,7 +23,7 @@ const PostPreview = ({ post, isSearch = false, isPostSave = false, isAdmin = fal
     return moment(date).fromNow();
   }, []);
   const { onAddUserSavePost } = useUser();
-  const { onUpdatePostStatus } = usePost();
+  const { onUpdatePostStatus, onGetAllCrawlPost } = usePost();
   const handleSavePost = useCallback((postId: number) => {
     onAddUserSavePost(postId);
   }, []);
@@ -105,7 +105,10 @@ const PostPreview = ({ post, isSearch = false, isPostSave = false, isAdmin = fal
                 showConfirm(
                   'Active post',
                   `Do you sure you want to active this post`,
-                  () => onUpdatePostStatus({ id: post.id, status: 'ACTIVE' }),
+                  () =>
+                    onUpdatePostStatus({ id: post.id, status: 'ACTIVE' }).then(() =>
+                      onGetAllCrawlPost(),
+                    ),
                   () => {},
                   'Active',
                 )
@@ -118,7 +121,10 @@ const PostPreview = ({ post, isSearch = false, isPostSave = false, isAdmin = fal
                 showConfirm(
                   'Delete post',
                   `Do you sure you want to delete this post`,
-                  () => onUpdatePostStatus({ id: post.id, status: 'DELETE' }),
+                  () =>
+                    onUpdatePostStatus({ id: post.id, status: 'DELETE' }).then(() =>
+                      onGetAllCrawlPost(),
+                    ),
                   () => {},
                   'Delete',
                 )

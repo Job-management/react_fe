@@ -28,10 +28,8 @@ const EditSkill = () => {
   useEffect(() => {
     onGetUserSkill();
   }, []);
-  console.log(userSkill);
   const handleUpdateUserSkill = useCallback(
     (data: Types.IUpdateSkill) => {
-      console.log(data);
       onUpdateUserSkill(data);
     },
     [form],

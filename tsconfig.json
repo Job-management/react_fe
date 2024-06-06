@@ -39,6 +39,8 @@
       "@themes/*": ["themes/*"],
       "@store": ["store"],
       "@store/*": ["store/*"],
+      "@socket": ["socket"],
+      "@socket/*": ["socket/*"],
     },
   },
   "include": ["src", "craco.config.ts"],

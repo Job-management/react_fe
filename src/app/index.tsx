@@ -1,6 +1,7 @@
 import { ConfigProvider } from 'antd';
 import { Fragment, Suspense } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { SocketProvider } from '@socket';
 
 import {
   CategoryScale,
@@ -40,40 +41,42 @@ function App() {
           fontFamily: 'Sawarabi Gothic, sans-serif',
         },
       }}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Navigate
-                to="/home"
-                replace
-              />
-            }
-          />
-          {routes.map((route) => {
-            const Protected = route.isProtected ? ProtectedRoute : Fragment;
-            const Layout = route.layout ?? Fragment;
-            const Component = route.component;
-            const isAdmin = route.isAdmin;
-            return (
-              <Route
-                key={route.key}
-                path={route.path}
-                element={
-                  <Protected isAdmin={isAdmin}>
-                    <Layout>
-                      <Suspense fallback={<Loading size="large" />}>
-                        <Component />
-                      </Suspense>
-                    </Layout>
-                  </Protected>
-                }
-              />
-            );
-          })}
-        </Routes>
-      </BrowserRouter>
+      <SocketProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Navigate
+                  to="/home"
+                  replace
+                />
+              }
+            />
+            {routes.map((route) => {
+              const Protected = route.isProtected ? ProtectedRoute : Fragment;
+              const Layout = route.layout ?? Fragment;
+              const Component = route.component;
+              const isAdmin = route.isAdmin;
+              return (
+                <Route
+                  key={route.key}
+                  path={route.path}
+                  element={
+                    <Protected isAdmin={isAdmin}>
+                      <Layout>
+                        <Suspense fallback={<Loading size="large" />}>
+                          <Component />
+                        </Suspense>
+                      </Layout>
+                    </Protected>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </BrowserRouter>
+      </SocketProvider>
     </ConfigProvider>
   );
 }

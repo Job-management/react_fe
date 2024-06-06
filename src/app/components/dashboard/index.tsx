@@ -15,12 +15,6 @@ const Dashboard = () => {
     onGetUserAnalyze();
     onGetCrawlAnalyze();
   }, []);
-  console.log(
-    userAnalyze.map((i: Types.IAnalyzeData) => ({
-      x: i.month,
-      y: i.total,
-    })),
-  );
   // Function to generate user views data
   const generateUserViews = useCallback(() => {
     const startDate = '2024-05-01';
