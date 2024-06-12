@@ -1,14 +1,18 @@
 {
-	"auth": {
-		"login": "Login",
-		"signUp": "Sign up",
-		"email": "Email",
-		"password": "Password",
-		"name": "Name",
-		"header": {
-			"login": "Sign in to your account"
-		}
-	},
-	"label_required": "Required",
-	"label_optional": "Optional"
+  "auth": {
+    "login": "Login",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "header": {
+      "login": "Sign in to your account"
+    }
+  },
+  "validate": {
+    "job": "Job",
+    "city": "City"
+  },
+  "label_required": "Required",
+  "label_optional": "Optional"
 }

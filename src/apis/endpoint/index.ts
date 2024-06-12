@@ -27,4 +27,15 @@ const CRAWL_API_URL = {
   ON_CRAWL_DATA: '/crawl',
 };
 
-export { BASE_API_URL, POST_API_URL, USER_API_URL, ANALYZE_API_URL, CRAWL_API_URL };
+const PREDICT_API_URL = {
+  JOB_OPPORTUNITY: '/api/v1/job_future',
+};
+
+export {
+  BASE_API_URL,
+  POST_API_URL,
+  USER_API_URL,
+  ANALYZE_API_URL,
+  CRAWL_API_URL,
+  PREDICT_API_URL,
+};

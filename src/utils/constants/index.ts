@@ -105,3 +105,20 @@ export const LEVEL_CATEGORY = [
   { value: '5', label: 'Senior' },
   { value: '6', label: 'Technical leader' },
 ];
+
+export const JOB_PREDICT = [
+  { value: 'ReactJs', label: 'ReactJs' },
+  { value: 'NodeJs', label: 'NodeJs' },
+  { value: 'Python Developer', label: 'Python Developer' },
+  { value: 'Java Developer', label: 'Java Developer' },
+  { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+  { value: 'Data Scientist', label: 'Data Scientist' },
+  { value: 'Frontend Developer', label: 'Frontend Developer' },
+  { value: 'Backend Developer', label: 'Backend Developer' },
+];
+
+export const CITY_PREDICT = [
+  { value: 'Hà Nội', label: 'Hà Nội' },
+  { value: 'Đà Nẵng', label: 'Đà Nẵng' },
+  { value: 'Hồ Chí Minh', label: 'Hồ Chí Minh' },
+];

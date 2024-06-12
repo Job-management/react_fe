@@ -7,6 +7,7 @@ import Post from '@pages/post';
 import SearchJob from '@pages/search-job';
 import ProfileUser from '@pages/ProfileUser';
 import Admin from '@pages/admin';
+import AIJob from '@pages/ai-job';
 const Routers: Types.IRoute[] = [
   {
     key: 1,
@@ -49,6 +50,14 @@ const Routers: Types.IRoute[] = [
     component: Admin,
     isProtected: true,
     isAdmin: true,
+    layout: LayoutDefault,
+  },
+  {
+    key: 7,
+    path: routes.AI_JOB,
+    component: AIJob,
+    isProtected: true,
+    isAdmin: false,
     layout: LayoutDefault,
   },
   {

@@ -6,6 +6,7 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { WrapperStyled } from './styled';
 import AdminPost from '@components/admin-post';
 import CrawlViecLam24h from '@components/crawl/vieclam24h';
+import JobOpportunity from '@components/job-opportunity';
 
 const Admin = () => {
   const { onGetAllCrawlPost } = usePost();
@@ -29,7 +30,7 @@ const Admin = () => {
         setContent(<p>VietnamSalary</p>);
         break;
       case '4':
-        setContent(<p>Job opportunity</p>);
+        setContent(<JobOpportunity />);
         break;
       case '5':
         setContent(<p>Facebook</p>);
