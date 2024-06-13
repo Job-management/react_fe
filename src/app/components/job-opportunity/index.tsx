@@ -4,12 +4,13 @@ import moment from 'moment';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import { CITY_PREDICT, JOB_PREDICT } from 'utils/constants';
+import JobPostingsChart from './Chart';
 
 import { WrapperStyled } from './styled';
 
 import { usePredict } from '@store/predict/predict.selector';
 import { TFunction } from 'i18next';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -45,7 +46,7 @@ const scheme = (t: TFunction) =>
 
 const JobOpportunity = () => {
   const { t } = useTranslation(['common']);
-
+  const [isShowAll, setIsShowAll] = useState<boolean>(true);
   const form = useForm<IFormItem>({
     defaultValues: {
       future_periods: 12,
@@ -55,17 +56,33 @@ const JobOpportunity = () => {
   const { handleSubmit } = form;
 
   const [rangeMonth, setRangeMonth] = useState<number>(0);
-  const { onGetPredictJobOpportunity, jobOpportunity, label } = usePredict();
+  const {
+    onGetPredictJobOpportunity,
+    jobOpportunity,
+    label,
+    onGetHistoricalJobOpportunity,
+    jobHistorical,
+  } = usePredict();
   const handleGetPredict = useCallback(
     (values: IFormItem) => {
       const { job, city } = values;
       const payload: Types.IJobPredictRequest = { job, city };
       if (rangeMonth) payload.future_periods = rangeMonth;
-
+      setIsShowAll(false);
       onGetPredictJobOpportunity(payload);
     },
     [rangeMonth],
   );
+
+  useEffect(() => {
+    onGetHistoricalJobOpportunity();
+  }, []);
+
+  const handleResetPredict = useCallback(() => {
+    setIsShowAll(true);
+    form.reset();
+  }, []);
+
   const handleChangeRangeMonth = useCallback((dateString: string) => {
     if (!dateString) return;
     const startDate = moment('2024-06');
@@ -83,6 +100,7 @@ const JobOpportunity = () => {
     });
     return list;
   }, [jobOpportunity]);
+
   return (
     <WrapperStyled>
       <h2 className="header">Job opportunity</h2>
@@ -125,43 +143,50 @@ const JobOpportunity = () => {
                 />
               </div>
             </Space>
-            <Button
-              type="primary"
-              htmlType="submit">
-              Predict
-            </Button>
+            <div className="buttons">
+              <Button onClick={() => handleResetPredict()}>Reset</Button>
+              <Button
+                type="primary"
+                htmlType="submit">
+                Predict
+              </Button>
+            </div>
           </form>
         </FormProvider>
         <div className="chart">
-          <Line
-            data={{
-              labels: generateDateList(),
-              datasets: [
-                {
-                  label: form.getValues('job'),
-                  data: jobOpportunity,
-                  backgroundColor: '#9ad0f5',
-                  borderColor: '#81c5f3',
+          {isShowAll ? (
+            <JobPostingsChart data={jobHistorical} />
+          ) : (
+            <Line
+              data={{
+                labels: generateDateList(),
+                datasets: [
+                  {
+                    label: form.getValues('job'),
+                    data: jobOpportunity,
+                    backgroundColor: '#9ad0f5',
+                    borderColor: '#81c5f3',
+                  },
+                ],
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: label,
+                  },
                 },
-              ],
-            }}
-            options={{
-              plugins: {
-                legend: {
-                  display: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
                 },
-                title: {
-                  display: true,
-                  text: label,
-                },
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            }}
-          />
+              }}
+            />
+          )}
         </div>
       </div>
     </WrapperStyled>

@@ -10,6 +10,8 @@ import {
   getUserSavePost,
   getUserByAdmin,
   deleteUserByAdmin,
+  resetPassword,
+  forgotPassword,
 } from './user.action';
 
 const initialState: Types.IUserState = {
@@ -150,6 +152,32 @@ const UserSlice = createSlice({
       state.actionType = action.type;
     });
     builder.addCase(deleteUserByAdmin.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // RESET PASSWORD
+    builder.addCase(resetPassword.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // FORGOT PASSWORD
+    builder.addCase(forgotPassword.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(forgotPassword.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(forgotPassword.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
     });

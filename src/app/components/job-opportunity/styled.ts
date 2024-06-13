@@ -17,6 +17,11 @@ export const WrapperStyled = styled.div`
       .date_picker {
         height: 42px;
       }
+      .buttons {
+        width: 160px;
+        display: flex;
+        justify-content: space-between;
+      }
     }
     .chart {
       margin-top: 24px;

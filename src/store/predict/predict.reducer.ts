@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import { Table } from 'utils/helpers/table';
 
-import { getPredictJobOpportunity } from './predict.action';
+import { getPredictJobOpportunity, getHistoricalJobOpportunity } from './predict.action';
 const initialState: Types.IPredictState = {
   actionType: '',
   loading: false,
   jobOpportunity: [],
   label: '',
+  jobHistorical: { labels: [], data: [] },
 };
 
 const PredictSlice = createSlice({
@@ -29,6 +30,21 @@ const PredictSlice = createSlice({
       state.label = `Dự đoán tuyển dụng vị trí ${action.meta.arg.job} tại ${action.meta.arg.city}`;
     });
     builder.addCase(getPredictJobOpportunity.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // history job opportunity data
+    builder.addCase(getHistoricalJobOpportunity.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(getHistoricalJobOpportunity.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+      state.jobHistorical = action.payload.data;
+      state.label = `Số lượng tuyển dụng ngành CNTT hiện tại`;
+    });
+    builder.addCase(getHistoricalJobOpportunity.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
     });

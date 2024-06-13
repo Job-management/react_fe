@@ -27,11 +27,13 @@ import { useTranslation } from 'react-i18next';
 import { loginScheme, signUpScheme } from './scheme';
 import Notification from '@components/notification';
 import { useNavigate } from 'react-router-dom';
+import ModalMail from '@components/modal-mail';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AuthForm = ({ closeFunc, isSignIn }: any) => {
   const { t } = useTranslation(['common']);
   const navigate = useNavigate();
+  const [isOpenForgotPassword, setIsOpenForgotPassword] = useState(false);
   const [active, setActive] = useState(isSignIn);
   const formLogin = useForm<{ email: string; password: string }>({
     resolver: yupResolver(loginScheme(t)),
@@ -70,6 +72,7 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
 
   return (
     <Wrapper>
+      {isOpenForgotPassword && <ModalMail close={() => setIsOpenForgotPassword(false)} />}
       <CloseAuth onClick={closeFunc} />
       <Container className={classNames({ active: active })}>
         {/* Sign up */}
@@ -152,7 +155,11 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
                 name="password"
                 placeholder="Password"
               />
-              <a href="#">Forget Your Password?</a>
+              <a
+                style={{ cursor: 'pointer' }}
+                onClick={() => setIsOpenForgotPassword(true)}>
+                Forget Your Password?
+              </a>
               <ButtonStyled htmlType="submit">Sign In</ButtonStyled>
             </Form>
           </FormProvider>
