@@ -8,6 +8,7 @@ import SearchJob from '@pages/search-job';
 import ProfileUser from '@pages/ProfileUser';
 import Admin from '@pages/admin';
 import AIJob from '@pages/ai-job';
+import ForgotPassword from '@pages/forgot-password';
 const Routers: Types.IRoute[] = [
   {
     key: 1,
@@ -59,6 +60,14 @@ const Routers: Types.IRoute[] = [
     isProtected: true,
     isAdmin: false,
     layout: LayoutDefault,
+  },
+  {
+    key: 8,
+    path: routes.FORGOT_PASSWORD,
+    component: ForgotPassword,
+    isProtected: false,
+    isAdmin: false,
+    layout: null,
   },
   {
     key: 404,

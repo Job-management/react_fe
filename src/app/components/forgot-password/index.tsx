@@ -14,28 +14,6 @@ import { removeLocalStorage, STORAGE } from '@utils/helpers';
 import { useNavigate } from 'react-router-dom';
 const scheme = (t: TFunction) =>
   yup.object().shape({
-    currentPassword: yup
-      .string()
-      .trim()
-      .required(
-        t('error_message:validation.required', {
-          key: t('common:auth.current_password'),
-        }),
-      )
-      .min(
-        8,
-        t('error_message:validation.min_length', {
-          key: t('common:auth.current_password'),
-          min: 8,
-        }),
-      )
-      .max(
-        32,
-        t('error_message:validation.max_length', {
-          key: t('common:auth.current_password'),
-          max: 32,
-        }),
-      ),
     newPassword: yup
       .string()
       .trim()
@@ -83,19 +61,18 @@ const scheme = (t: TFunction) =>
       .oneOf([yup.ref('newPassword')], t('error_message:validation.password_not_match')),
   });
 
-interface Props {
-  setIsShowChangePassword: (isShow: boolean) => void;
-}
-
 interface IFormItem {
-  currentPassword: string;
   newPassword: string;
   confirmPassword: string;
 }
 
-const ChangePassword = ({ setIsShowChangePassword }: Props) => {
+interface IProps {
+  token: string;
+}
+
+const ForgotPassword = ({ token }: IProps) => {
   const { t } = useTranslation(['common']);
-  const { onChangePassword } = useUser();
+  const { onResetPassword } = useUser();
   const navigate = useNavigate();
 
   const form = useForm<IFormItem>({
@@ -106,20 +83,24 @@ const ChangePassword = ({ setIsShowChangePassword }: Props) => {
 
   const handleSaveNewPassword = useCallback(
     (data: IFormItem) => {
-      const payload: { password: string; currentPassword: string } = {
+      const payload: { password: string; token: string } = {
         password: '',
-        currentPassword: '',
+        token,
       };
-      payload.currentPassword = data.currentPassword;
       payload.password = data.newPassword;
-      onChangePassword(payload)
+      onResetPassword(payload)
         .then((data: any) => {
+          // eslint-disable-next-line no-debugger
+          debugger;
+
           if (!data.error) {
             Notification.success('Change password success');
             removeLocalStorage(STORAGE.USER_TOKEN);
             removeLocalStorage(STORAGE.USER_REFRESH);
             removeLocalStorage(STORAGE.USER_DATA);
-            navigate(0);
+            setTimeout(() => {
+              navigate('/home');
+            }, 3000);
           }
         })
         .catch(() => console.log('change password failure'));
@@ -131,15 +112,11 @@ const ChangePassword = ({ setIsShowChangePassword }: Props) => {
     <WrapperStyled>
       <div className="container">
         <div className="header-wrapper">
-          <h3 id="header">CHANGE PASSWORD</h3>
+          <h3 id="header">RESET YOUR PASSWORD</h3>
         </div>
         <div id="form_change_password">
           <FormProvider {...form}>
             <form onSubmit={handleSubmit(handleSaveNewPassword)}>
-              <FormPassword
-                placeholder="Current password"
-                name="currentPassword"
-              />
               <FormPassword
                 placeholder="New password"
                 name="newPassword"
@@ -150,15 +127,10 @@ const ChangePassword = ({ setIsShowChangePassword }: Props) => {
               />
               <div className="controller">
                 <Button
-                  className="btn"
-                  onClick={() => setIsShowChangePassword(false)}>
-                  Cancel
-                </Button>
-                <Button
                   htmlType="submit"
                   className="btn"
                   type="primary">
-                  Save
+                  Confirm reset password
                 </Button>
               </div>
             </form>
@@ -169,4 +141,4 @@ const ChangePassword = ({ setIsShowChangePassword }: Props) => {
   );
 };
 
-export default ChangePassword;
+export default ForgotPassword;

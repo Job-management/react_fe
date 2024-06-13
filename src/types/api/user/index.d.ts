@@ -3,6 +3,13 @@ declare namespace Types {
     currentPassword: string;
     password: string;
   }
+  interface IResetPasswordRequest {
+    password: string;
+    token: string;
+  }
+  interface IForgotPasswordRequest {
+    email: string;
+  }
   interface IUpdateUserInfo {
     avatar?: string;
     name?: string;

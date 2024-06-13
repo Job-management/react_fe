@@ -5,6 +5,7 @@ import PostSave from '@components/post-save';
 import { useUser } from '@store/user/user.selector';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { WrapperStyled } from './styled';
+import JobOpportunity from '@components/job-opportunity';
 const ProfileUser = () => {
   const { onGetUserSavePost } = useUser();
   const [content, setContent] = useState<ReactNode>(null);
@@ -16,6 +17,12 @@ const ProfileUser = () => {
         break;
       case '2':
         setContent(<EditSkill />);
+        break;
+      case '3':
+        setContent(<p>Vietnam Salary</p>);
+        break;
+      case '4':
+        setContent(<JobOpportunity />);
         break;
       case '5':
         onGetUserSavePost();

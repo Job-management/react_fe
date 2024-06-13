@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -187,8 +186,51 @@ export const deleteUserByAdmin = createAsyncThunk(
   'user/deleteUserByAdmin',
   async (id: string, { rejectWithValue }) => {
     try {
-      debugger;
       const response = await apiUser.delete<any>(USER_API_URL.USER + '/' + id);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const resetPassword = createAsyncThunk(
+  'user/resetPassword',
+  async (payload: Types.IResetPasswordRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.post<any>(USER_API_URL.RESET_PASSWORD, payload);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const forgotPassword = createAsyncThunk(
+  'user/forgotPassword',
+  async (payload: Types.IForgotPasswordRequest, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.post<any>(USER_API_URL.FORGOT_PASSWORD, payload);
       return {
         data: response.data,
       };

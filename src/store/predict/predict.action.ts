@@ -30,3 +30,27 @@ export const getPredictJobOpportunity = createAsyncThunk(
     }
   },
 );
+
+export const getHistoricalJobOpportunity = createAsyncThunk(
+  'predict/getHistoricalJobOpportunity',
+  async (_, { rejectWithValue }) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response = await apiPredict.get<any>(PREDICT_API_URL.JOB_HISTORICAL);
+
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
