@@ -16,6 +16,8 @@ const USER_API_URL = {
   USER_SKILL: '/api/v1/user/skill',
   USER_SAVE_POST: '/api/v1/user/save-post',
   USER: '/api/v1/user',
+  FORGOT_PASSWORD: '/api/v1/auth/forgot-password',
+  RESET_PASSWORD: '/api/v1/auth/update-forgot-password',
 };
 
 const ANALYZE_API_URL = {
@@ -27,4 +29,16 @@ const CRAWL_API_URL = {
   ON_CRAWL_DATA: '/crawl',
 };
 
-export { BASE_API_URL, POST_API_URL, USER_API_URL, ANALYZE_API_URL, CRAWL_API_URL };
+const PREDICT_API_URL = {
+  JOB_OPPORTUNITY: '/api/v1/job_future',
+  JOB_HISTORICAL: '/api/v1/job_history',
+};
+
+export {
+  BASE_API_URL,
+  POST_API_URL,
+  USER_API_URL,
+  ANALYZE_API_URL,
+  CRAWL_API_URL,
+  PREDICT_API_URL,
+};

@@ -11,6 +11,8 @@ import {
   getUserSavePost,
   getUserByAdmin,
   deleteUserByAdmin,
+  resetPassword,
+  forgotPassword,
 } from './user.action';
 
 export const useUser = () => {
@@ -69,6 +71,18 @@ export const useUser = () => {
     },
     [dispatch],
   );
+  const onResetPassword = useCallback(
+    async (data: Types.IResetPasswordRequest) => {
+      return await dispatch(resetPassword(data));
+    },
+    [dispatch],
+  );
+  const onForgotPassword = useCallback(
+    async (data: Types.IForgotPasswordRequest) => {
+      return await dispatch(forgotPassword(data));
+    },
+    [dispatch],
+  );
 
   return {
     onChangePassword,
@@ -80,6 +94,8 @@ export const useUser = () => {
     onGetUserSavePost,
     onGetUserByAdmin,
     onDeleteUserByAdmin,
+    onResetPassword,
+    onForgotPassword,
     userList,
     savePost,
     userSkill,

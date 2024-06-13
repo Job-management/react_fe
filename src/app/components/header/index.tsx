@@ -33,13 +33,13 @@ const Header = () => {
               </a>
               <nav className="flex space-x-4">
                 <div className="hover:text-gray-400 cursor-pointer">
-                  <a href="#a">Find jobs</a>
+                  <a href="/search-job">Find jobs</a>
                 </div>
+                {/* <div className="hover:text-gray-400 cursor-pointer">
+                  <a href="/ai/salary">VietnamSalary</a>
+                </div> */}
                 <div className="hover:text-gray-400 cursor-pointer">
-                  <a href="#a">VietnamSalary</a>
-                </div>
-                <div className="hover:text-gray-400 cursor-pointer">
-                  <a href="#a">Career Opportunity</a>
+                  <a href="/ai/job-opportunity">Career Opportunity</a>
                 </div>
               </nav>
             </div>

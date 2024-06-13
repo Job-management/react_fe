@@ -6,5 +6,7 @@ export default {
   POST_SEARCH: '/search-job',
   PROFILE_USER: '/profile-user/:id',
   ADMIN: '/admin',
+  AI_JOB: '/ai/job-opportunity',
+  FORGOT_PASSWORD: 'auth/forgot-password/:token',
   NOTFOUND: '*',
 };
