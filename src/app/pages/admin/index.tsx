@@ -7,6 +7,7 @@ import { WrapperStyled } from './styled';
 import AdminPost from '@components/admin-post';
 import CrawlViecLam24h from '@components/crawl/vieclam24h';
 import JobOpportunity from '@components/job-opportunity';
+import CrawlFacebook from '@components/crawl/facebook';
 
 const Admin = () => {
   const { onGetAllCrawlPost } = usePost();
@@ -33,7 +34,7 @@ const Admin = () => {
         setContent(<JobOpportunity />);
         break;
       case '5':
-        setContent(<p>Facebook</p>);
+        setContent(<CrawlFacebook />);
         break;
       case '6':
         setContent(<CrawlViecLam24h />);

@@ -26,7 +26,7 @@ const ANALYZE_API_URL = {
 };
 
 const CRAWL_API_URL = {
-  ON_CRAWL_DATA: '/crawl',
+  ON_CRAWL_DATA: '/crawl/trigger',
 };
 
 const PREDICT_API_URL = {
