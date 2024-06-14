@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // import { Table } from 'utils/helpers/table';
 
-import { crawlVieclam24h } from './crawl.action';
+import { crawlVieclam24h, crawlFacebook } from './crawl.action';
 const initialState: Types.ICrawlState = {
   actionType: '',
   loading: false,
@@ -26,6 +26,18 @@ const CrawlSlice = createSlice({
       state.actionType = action.type;
     });
     builder.addCase(crawlVieclam24h.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(crawlFacebook.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(crawlFacebook.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(crawlFacebook.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
     });
