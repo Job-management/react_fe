@@ -14,7 +14,7 @@ function SocketProvider({ children, ...props }: any) {
     if (!BASE_SOCKET_URL) return;
     const socket = io(BASE_SOCKET_URL, {
       transports: ['websocket'],
-      path: '/socket.io',
+      path: '/crawl/socket.io',
     }) as any;
     setSocket(socket);
 
