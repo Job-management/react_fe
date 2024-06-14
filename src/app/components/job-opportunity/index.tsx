@@ -83,7 +83,7 @@ const JobOpportunity = () => {
     form.reset();
   }, []);
 
-  const handleChangeRangeMonth = useCallback((dateString: string) => {
+  const handleChangeRangeMonth = useCallback((dateString: string | string[]) => {
     if (!dateString) return;
     const startDate = moment('2024-06');
     const endDate = moment(dateString);
@@ -139,7 +139,9 @@ const JobOpportunity = () => {
                       moment().add(-1, 'days') >= current || moment().add(12, 'month') <= current
                     );
                   }}
-                  onChange={(date, dateString) => handleChangeRangeMonth(dateString)}
+                  onChange={(date, dateString: string | string[]) =>
+                    handleChangeRangeMonth(dateString)
+                  }
                 />
               </div>
             </Space>
