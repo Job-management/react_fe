@@ -30,8 +30,8 @@ const CRAWL_API_URL = {
 };
 
 const PREDICT_API_URL = {
-  JOB_OPPORTUNITY: '/api/v1/job_future',
-  JOB_HISTORICAL: '/api/v1/job_history',
+  JOB_OPPORTUNITY: '/ai/api/v1/job_future',
+  JOB_HISTORICAL: '/ai/api/v1/job_history',
 };
 
 export {

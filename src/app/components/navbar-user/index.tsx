@@ -51,7 +51,7 @@ const NavBarUser = ({ setMenuId }: Props) => {
   return (
     <Menu
       onClick={onClick}
-      style={{ width: 256 }}
+      style={{ width: 256, height: 'calc(100vh - 72px)' }}
       defaultSelectedKeys={['1']}
       defaultOpenKeys={['account', 'ai']}
       mode="inline"
