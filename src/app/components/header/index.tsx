@@ -39,7 +39,7 @@ const Header = () => {
                   <a href="/ai/salary">VietnamSalary</a>
                 </div> */}
                 <div className="hover:text-gray-400 cursor-pointer">
-                  <a href="/ai/job-opportunity">Career Opportunity</a>
+                  <a href="/ai-predict/job-opportunity">Career Opportunity</a>
                 </div>
               </nav>
             </div>

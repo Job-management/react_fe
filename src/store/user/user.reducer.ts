@@ -12,6 +12,7 @@ import {
   deleteUserByAdmin,
   resetPassword,
   forgotPassword,
+  mailSubscribe,
 } from './user.action';
 
 const initialState: Types.IUserState = {
@@ -178,6 +179,19 @@ const UserSlice = createSlice({
       state.actionType = action.type;
     });
     builder.addCase(forgotPassword.rejected, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    // MAIL SUBSCRIBE
+    builder.addCase(mailSubscribe.pending, (state, action) => {
+      state.loading = true;
+      state.actionType = action.type;
+    });
+    builder.addCase(mailSubscribe.fulfilled, (state, action) => {
+      state.loading = false;
+      state.actionType = action.type;
+    });
+    builder.addCase(mailSubscribe.rejected, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
     });

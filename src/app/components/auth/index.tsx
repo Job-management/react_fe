@@ -44,7 +44,7 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
   const { handleSubmit: handleSubmitLogin } = formLogin;
   const { handleSubmit: handleSubmitSignUp } = formSignUp;
 
-  const { onLogin, onSignUp } = useAuth();
+  const { onLogin, onSignUp, loading } = useAuth();
 
   const onSubmitLogin = useCallback(
     (data: Types.ILoginRequest) => {
@@ -53,7 +53,9 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
         if (!response?.error) {
           Notification.success('Login successful');
           closeFunc();
-          navigate(0);
+          if (response.payload.data.data.user.role === 'admin') {
+            navigate('/admin');
+          }
         }
       });
     },
@@ -63,7 +65,7 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
   const onSubmitSignUp = useCallback(
     (data: Types.ISignUpRequest) => {
       onSignUp(data).then(() => {
-        Notification.success('Sign up successful');
+        Notification.success('Sign up successful, please check your email to verify account');
         setActive(false);
       });
     },
@@ -115,7 +117,11 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
                 name="password"
                 placeholder="Password"
               />
-              <ButtonStyled htmlType="submit">Sign Up</ButtonStyled>
+              <ButtonStyled
+                loading={loading}
+                htmlType="submit">
+                Sign Up
+              </ButtonStyled>
             </Form>
           </FormProvider>
         </FormContainer>
@@ -160,7 +166,11 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
                 onClick={() => setIsOpenForgotPassword(true)}>
                 Forget Your Password?
               </a>
-              <ButtonStyled htmlType="submit">Sign In</ButtonStyled>
+              <ButtonStyled
+                loading={loading}
+                htmlType="submit">
+                Sign In
+              </ButtonStyled>
             </Form>
           </FormProvider>
         </FormContainer>

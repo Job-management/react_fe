@@ -247,3 +247,25 @@ export const forgotPassword = createAsyncThunk(
     }
   },
 );
+
+export const mailSubscribe = createAsyncThunk(
+  'user/mailSubscribe',
+  async (payload: Types.IMailSubscribe, { rejectWithValue }) => {
+    try {
+      const response = await apiUser.post<any>(USER_API_URL.MAIL_SUBSCRIBE, payload);
+      return {
+        data: response.data,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Modal.error({
+        title: err?.response?.data?.message,
+        className: 'modal-type-2',
+        onOk: () => {
+          return;
+        },
+      });
+      return rejectWithValue(err);
+    }
+  },
+);
