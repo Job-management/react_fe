@@ -13,6 +13,7 @@ import {
   deleteUserByAdmin,
   resetPassword,
   forgotPassword,
+  mailSubscribe,
 } from './user.action';
 
 export const useUser = () => {
@@ -83,6 +84,12 @@ export const useUser = () => {
     },
     [dispatch],
   );
+  const onMailSubscribe = useCallback(
+    async (data: Types.IMailSubscribe) => {
+      return await dispatch(mailSubscribe(data));
+    },
+    [dispatch],
+  );
 
   return {
     onChangePassword,
@@ -96,6 +103,7 @@ export const useUser = () => {
     onDeleteUserByAdmin,
     onResetPassword,
     onForgotPassword,
+    onMailSubscribe,
     userList,
     savePost,
     userSkill,

@@ -18,6 +18,7 @@ const USER_API_URL = {
   USER: '/api/v1/user',
   FORGOT_PASSWORD: '/api/v1/auth/forgot-password',
   RESET_PASSWORD: '/api/v1/auth/update-forgot-password',
+  MAIL_SUBSCRIBE: '/api/v1/mail-schedule',
 };
 
 const ANALYZE_API_URL = {

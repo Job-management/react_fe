@@ -5,6 +5,9 @@ import { TFunction } from 'i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput } from '@components';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '@store/user/user.selector';
+import Notification from '@components/notification';
+import { Button } from 'antd';
 
 const schema = (t: TFunction) =>
   yup.object().shape({
@@ -32,11 +35,20 @@ const schema = (t: TFunction) =>
 
 const MailSubscribe = () => {
   const { t } = useTranslation(['common']);
-  const form = useForm<{ email: string }>({
+  const { onMailSubscribe, loading } = useUser();
+  const form = useForm<Types.IMailSubscribe>({
     resolver: yupResolver(schema(t)),
   });
   const { handleSubmit: handleSubmitSubscribe } = form;
-  const onSubmitSubscribe = () => {};
+  const onSubmitSubscribe = (data: Types.IMailSubscribe) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onMailSubscribe(data).then((data: any) => {
+      if ('error' in data) {
+        return Notification.error(data?.error);
+      }
+      return Notification.success('Please check your email to confirm subscribe');
+    });
+  };
   return (
     <WrapperStyled className="form-email-get-job lazy-bg">
       <div className="container">
@@ -54,11 +66,12 @@ const MailSubscribe = () => {
               className="input-mail"
               placeholder="Nhập địa chỉ email của bạn"
             />
-            <button
-              type="submit"
+            <Button
+              htmlType="submit"
+              loading={loading}
               className="btn-subscribe">
               <span className="mdi mdi-pencil"></span>ĐĂNG KÝ NGAY
-            </button>
+            </Button>
           </form>
         </FormProvider>
       </div>

@@ -23,4 +23,7 @@ declare namespace Types {
     city: string;
     level: string;
   }
+  interface IMailSubscribe {
+    email: string;
+  }
 }
