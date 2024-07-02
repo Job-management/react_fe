@@ -52,11 +52,11 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
       onLogin(data).then((response: any) => {
         if (!response?.error) {
           Notification.success('Login successful');
-          closeFunc();
           if (response.payload.data.data.user.role === 'admin') {
-            navigate('/admin');
+            return navigate('/admin');
           }
-          navigate('/home');
+          navigate(0);
+          closeFunc();
         }
       });
     },
