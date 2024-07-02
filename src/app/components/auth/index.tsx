@@ -56,6 +56,7 @@ const AuthForm = ({ closeFunc, isSignIn }: any) => {
           if (response.payload.data.data.user.role === 'admin') {
             navigate('/admin');
           }
+          navigate('/home');
         }
       });
     },
