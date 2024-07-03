@@ -75,7 +75,7 @@ const Toolbar = () => {
           onChange={(value) => {
             setSearchState((prev) => ({ ...prev, major: value }));
           }}
-          defaultValue={Number(searchState.major)}
+          defaultValue={searchState.major ? Number(searchState.major) : ''}
           allowClear
         />
         <Select

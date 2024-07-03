@@ -13,7 +13,9 @@ declare namespace Types {
   interface IUpdateUserInfo {
     avatar?: string;
     name?: string;
-    birthday?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    birthday?: any;
+    email?: string;
     phone?: string;
   }
   interface IUpdateSkill {
