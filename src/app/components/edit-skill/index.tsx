@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 import { MAJOR_CATEGORY, SKILL_CATEGORY, LEVEL_CATEGORY } from '@utils/constants';
 import { useUser } from '@store/user/user.selector';
+import Notification from '@components/notification';
 
 import { WrapperStyled } from './styled';
 import { useCallback, useEffect } from 'react';
@@ -30,7 +31,9 @@ const EditSkill = () => {
   }, []);
   const handleUpdateUserSkill = useCallback(
     (data: Types.IUpdateSkill) => {
-      onUpdateUserSkill(data);
+      onUpdateUserSkill(data).then(() => {
+        Notification.success("User's skills is updated");
+      });
     },
     [form],
   );

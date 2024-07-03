@@ -50,7 +50,7 @@ const EditInfo = () => {
         birthday: data.birthday ? data.birthday.format('YYYY-MM-DD') : null,
       };
       onUpdateProfile(payload).then(() => {
-        Notification.success('User profile is updated');
+        Notification.success("User's profile is updated");
       });
     },
     [onUpdateProfile],
