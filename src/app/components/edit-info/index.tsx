@@ -1,13 +1,15 @@
 import { CopyOutlined, LockOutlined, SaveOutlined } from '@ant-design/icons';
 import ChangePassword from '@components/change-password';
 import { FormDatePicker, FormInput } from '@components/form';
+import Notification from '@components/notification';
 import { useUser } from '@store/user/user.selector';
 import { Button, Upload } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { WrapperStyled } from './styled';
-import moment from 'moment';
+// import moment from 'moment';
+import dayjs from 'dayjs';
 
 const EditInfo = () => {
   const { profile, onGetProfile, onUpdateProfile } = useUser();
@@ -15,25 +17,41 @@ const EditInfo = () => {
   const [isShowChangePassword, setIsShowChangePassword] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [imageUrl, setImageUrl] = useState<string>(profile?.avatar?.url);
-  const form = useForm<Types.IUpdateUserInfo>();
-  const { handleSubmit } = form;
+
+  const form = useForm<Types.IUpdateUserInfo>({
+    defaultValues: {
+      name: profile?.name,
+      birthday: profile?.birthday ? dayjs(profile?.birthday) : null,
+      email: profile?.email,
+      phone: profile?.phone,
+    },
+  });
+  const { handleSubmit, setValue } = form;
 
   useEffect(() => {
     if (!id) return;
     onGetProfile(id);
-  }, []);
+  }, [id, onGetProfile]);
+
+  useEffect(() => {
+    if (profile) {
+      setValue('name', profile.name);
+      setValue('birthday', profile.birthday ? dayjs(profile.birthday) : null);
+      setValue('phone', profile.phone);
+      setValue('email', profile.email);
+    }
+  }, [profile, setValue]);
 
   const onUpdateUserInfo = useCallback(
     (data: Types.IUpdateUserInfo) => {
-      const filteredData = Object.keys(data).reduce((acc, key) => {
-        const typedKey = key as keyof Types.IUpdateUserInfo;
-        if (data[typedKey]) {
-          acc[typedKey] = data[typedKey];
-        }
-        return acc;
-      }, {} as Types.IUpdateUserInfo);
-
-      onUpdateProfile(filteredData);
+      console.log(data);
+      const payload = {
+        ...data,
+        birthday: data.birthday ? data.birthday.format('YYYY-MM-DD') : null,
+      };
+      onUpdateProfile(payload).then(() => {
+        Notification.success('User profile is updated');
+      });
     },
     [onUpdateProfile],
   );
@@ -96,15 +114,14 @@ const EditInfo = () => {
                       name="name"
                       label="Name"
                       className="field"
-                      value={profile?.name}
                     />
                   </div>
                   <div className="field">
                     <FormDatePicker
                       name="birthday"
-                      label="birthday"
                       className="field"
-                      value={moment(profile?.birthday)}
+                      format="YYYY-MM-DD"
+                      useDate
                     />
                   </div>
                 </div>
@@ -122,7 +139,6 @@ const EditInfo = () => {
                       label="Phone"
                       className="field"
                       placeholder="+84 xxx xxx xxx"
-                      value={profile?.phone}
                     />
                   </div>
                   <div className="field">
@@ -131,7 +147,6 @@ const EditInfo = () => {
                       label="email"
                       className="field"
                       readOnly
-                      value={profile?.email}
                     />
                   </div>
                 </div>

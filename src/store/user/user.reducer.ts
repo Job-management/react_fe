@@ -52,6 +52,7 @@ const UserSlice = createSlice({
     builder.addCase(getProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
+      console.log(action.payload.data);
       state.profile = action.payload.data;
     });
     builder.addCase(getProfile.rejected, (state, action) => {
@@ -66,7 +67,6 @@ const UserSlice = createSlice({
     builder.addCase(updateProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.actionType = action.type;
-      state.profile = action.payload.data;
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
       state.loading = false;
